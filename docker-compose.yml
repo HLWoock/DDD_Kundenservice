@@ -1,0 +1,21 @@
+version: '3'
+services:
+  activemq:
+    image: rmohr/activemq:latest
+    ports:
+      - 61616:61616   # OpenWire
+      - 8161:8161     # Web Console
+    volumes:
+      - ./data:/var/lib/activemq/data
+    networks:
+      - stattauto
+  kundenservice:
+    image: oosemicro/sb-kundenservice:0.1.0
+    ports:
+      - 8081:8081
+    networks:
+      - stattauto
+ 
+networks:
+  stattauto:
+    driver: bridge
