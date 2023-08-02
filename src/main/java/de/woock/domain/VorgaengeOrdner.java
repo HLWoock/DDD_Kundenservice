@@ -22,7 +22,11 @@ public class VorgaengeOrdner {
 	}
 	
 	public List<Vorgang> alleVorgaenge() {
-		return vorgaenge.alle();
+		return vorgaenge.alleVorgaenge();
+	}
+
+	public List<Anfrage> alleAbfragen() {
+		return vorgaenge.alleAnfragen();
 	}
 
 }

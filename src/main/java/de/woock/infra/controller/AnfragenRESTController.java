@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import de.woock.domain.Anfrage;
 import de.woock.domain.Vorgang;
 import de.woock.infra.service.VorgangService;
 import lombok.AllArgsConstructor;
@@ -18,7 +19,7 @@ public class AnfragenRESTController {
 	private VorgangService vorgangService;
 	
 	@GetMapping("/anfragen")
-	public List<Vorgang> alleAnfragen() {
+	public List<Anfrage> alleAnfragen() {
 		return vorgangService.alleAnfragen();
 	}
 	

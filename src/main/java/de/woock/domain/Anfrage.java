@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Transient;
 
 import de.woock.Kundenservice;
 import lombok.Data;
@@ -23,6 +24,7 @@ import lombok.NoArgsConstructor;
 public class Anfrage extends    Vorgang 
                      implements Serializable {
 
+								 @Transient
 								 private Speichern speichern;
 	                             private String anfrage;
 	                             private String antwort;
@@ -51,7 +53,7 @@ public class Anfrage extends    Vorgang
 		Kundenservice.vorgaengeOrdner.updaten(this);
 	}
 	
-	public static List<Vorgang> liste() {
-		return Kundenservice.vorgaengeOrdner.alleVorgaenge();
+	public static List<Anfrage> liste() {
+		return Kundenservice.vorgaengeOrdner.alleAbfragen();
 	}
 }
