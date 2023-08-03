@@ -29,6 +29,7 @@ public class Anfrage extends    Vorgang
 	                             private String anfrage;
 	                             private String antwort;
 	                             private Date   von;
+	                             private Prio   prio;
 	@Enumerated(EnumType.STRING) private Status status;
 	
 	public Anfrage(String text, Speichern speichern) {
