@@ -63,12 +63,14 @@
 			        <th>Anfragen Nr.</th>
 			        <th>Anfrage</th>
 			        <th>Antwort</th>
+			        <th>Prio</th>
 			    </tr>
 			    <#list anfragen as anfrage>
 					<tr>
 					    <td>${anfrage.id}</td>
 					    <td>${anfrage.anfrage}</td>
 					    <td>${anfrage.antwort}</td>
+					    <td>${anfrage.prio}</td>
 			        </tr>
 				</#list>
 			</table>

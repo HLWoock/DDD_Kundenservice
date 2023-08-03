@@ -1,5 +1,6 @@
 package de.woock.domain;
 
+import static de.woock.domain.Prio.hoch;
 import static de.woock.domain.Status.AUFGENOMMEN;
 
 import java.io.Serializable;
@@ -41,6 +42,7 @@ public class Anfrage extends    Vorgang
 		this.anfrage = anfrage;
 		this.von     = new Date();
 		this.status  = AUFGENOMMEN;
+		this.prio    = hoch;
 		return Kundenservice.vorgaengeOrdner.abheften(this);	
 	}
 
