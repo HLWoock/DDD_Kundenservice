@@ -102,7 +102,7 @@
 			</table>
 		    <br>
 		    <form method="get" action="/neueAnfrage" >
-		   		<button id="bottom" type="submit" background-color="blue">Neue Anfrage erstellen</button>
+		   		<button id="bottom" type="submit" background-color="blue">Neue Anfrage stellen</button>
 			</form>
 			<br>
       </div>

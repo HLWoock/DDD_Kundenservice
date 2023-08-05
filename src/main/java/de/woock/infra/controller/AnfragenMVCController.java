@@ -54,7 +54,7 @@ public class AnfragenMVCController {
 	
 	@PostMapping("/anfrage/{anfrageId}/bearbeiten")
 	public String anfrageBearbeiten(@ModelAttribute("anfrage") Anfrage anfrage) {
-		log.debug("Anfrage {}/{} bearbeitet", anfrage.getId(), anfrage.getVersion());
+		log.debug("Anfrage {}/{} fertig bearbeitet", anfrage.getId(), anfrage.getVersion());
 		try {
 			anfrage.aktualisiert();
 		} catch (ObjectOptimisticLockingFailureException ex) {
