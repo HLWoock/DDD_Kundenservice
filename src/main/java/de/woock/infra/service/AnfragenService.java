@@ -13,7 +13,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Service
-public class VorgangService {
+public class AnfragenService {
 	
 	private VorgangRepository vorgangRepository;
 	private AnfrageReposity   anfrageReposity;

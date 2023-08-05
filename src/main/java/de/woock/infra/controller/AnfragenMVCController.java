@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import de.woock.domain.Anfrage;
 import de.woock.domain.Prio;
 import de.woock.domain.Status;
-import de.woock.infra.service.VorgangService;
+import de.woock.infra.service.AnfragenService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -26,7 +26,7 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 public class AnfragenMVCController {
 	
-	private VorgangService vorgangService;
+	private AnfragenService vorgangService;
 
 	@GetMapping({"/", "/index"})
     public ModelAndView home() {
