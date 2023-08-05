@@ -80,7 +80,8 @@
 			<table class="table table-striped" border="1">
 			    <tr>
 			        <th>Anfragen Nr.</th>
-			        <th>Anfrage</th>
+			        <th style="display:none;">Version</th>
+			        <th>Frage</th>
 			        <th>Antwort</th>
 			        <th>Prio</th>
 			        <th>Aktion</th>
@@ -88,6 +89,7 @@
 			    <#list anfragen as anfrage>
 					<tr>
 					    <td>${anfrage.id}</td>
+					    <td style="display:none;">${anfrage.version}</td>
 					    <td>${anfrage.frage}</td>
 					    <td>${anfrage.antwort}</td>
 					    <td>${anfrage.prio}</td>
@@ -99,7 +101,7 @@
 				</#list>
 			</table>
 		    <br>
-		    <form method="get" action="/addAnfrage" >
+		    <form method="get" action="/neueAnfrage" >
 		   		<button id="bottom" type="submit" background-color="blue">Neue Anfrage erstellen</button>
 			</form>
 			<br>

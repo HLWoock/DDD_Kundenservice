@@ -102,33 +102,13 @@
 					<@spring.bind "statuus"/>
 					<form name="anfrage" action="" method="POST" modelAttribute="anfrage">
 						<div class="form-group">
-						    <label for="anfrage">Anfrage ID</label>
-							<@spring.formInput "anfrage.id" "placeholder='id' readonly='true'" "text"/> <br />
-						</div><br>
-						<div class="form-group">
-						    <label for="version">Version</label>
-							<@spring.formInput "anfrage.version" "placeholder='version' readonly='false'" "text"/> <br />
-						</div><br>
-						<div class="form-group">
 						    <label for="id">Frage</label>
-							<@spring.formTextarea "anfrage.frage" "rows='4' cols='60' readonly='true'" /> <br />
+							<@spring.formTextarea "anfrage.frage" "rows='4' cols='60'" /> <br />
 						</div><br>
 						<div class="form-group">
 						    <label for="anfrage">Antwort</label>
 							<@spring.formTextarea "anfrage.antwort" "rows='4' cols='60'" /> <br />
 						</div><br>
-						<div class="form-group">
-						    <label for="von">vom</label>
-							<@spring.formInput "anfrage.von" "placeholder='von' readonly='true'" "text"/> <br />
-						</div><br>
-					    <div class="form-group">
-					        <label for="status">Status</label>
-					        <@spring.formSingleSelect "anfrage.status" statuus "style='width:200px'" />
-					    </div><br>
-					    <div class="form-group">
-					        <label for="prio">Prio</label>
-					        <@spring.formSingleSelect "anfrage.prio" prios "style='width:200px'" />
-					    </div><br>  
 						
 						<input type="submit" value="Bearbeitet" />
 					</form>

@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -35,26 +35,47 @@ public class AnfragenMVCController {
         return model;
     }
 	
+	@GetMapping("/about")
+	public String about() {
+		return "about";
+	}
+
 	@GetMapping("/anfrage/{anfrageId}/bearbeiten")
 	public ModelAndView anfrageBearbeitenForm(@PathVariable Long anfrageId) {
 		ModelAndView model = new ModelAndView("anfrageBearbeiten");
-		List<String> statuus = Stream.of(Status.values())
-                                     .map(Enum::name)
-                                     .collect(Collectors.toList());
+		Anfrage anfrage = vorgangService.anfrage(anfrageId);
+		
 		model.addObject("prios", Prio.values());
-		model.addObject("statuus", statuus); 
-		model.addObject("anfrage", vorgangService.anfrage(anfrageId));
+		model.addObject("statuus", Status.values()); 
+		model.addObject("anfrage", anfrage);
+		log.debug("Anfrage {}/{} wird gerade zur Bearbeitung in die Anzeige gebracht", anfrage.getId(), anfrageId);
 		return model;
 	}
 	
 	@PostMapping("/anfrage/{anfrageId}/bearbeiten")
-	public String anfrageBearbeiten(@ModelAttribute("anfrage") Anfrage anfrage, Model model) {
-		log.debug("anfrage: {}, model {}", anfrage, model.getAttribute("anfrage"));
+	public String anfrageBearbeiten(@ModelAttribute("anfrage") Anfrage anfrage) {
+		log.debug("Anfrage {}/{} bearbeitet", anfrage.getId(), anfrage.getVersion());
+		try {
+			anfrage.aktualisiert();
+		} catch (ObjectOptimisticLockingFailureException ex) {
+			log.error("Anfrage {}/{} wird gerade von jemand anderem bearbeitet", anfrage.getId(), anfrage.getVersion());
+		}
 		return "redirect:/";
 	}
 	
-	@GetMapping("/about")
-	public String about() {
-		return "about";
+	@GetMapping("/neueAnfrage")
+	public ModelAndView neueAnfrageBearbeitenForm() {
+		ModelAndView model = new ModelAndView("neueAnfrage");
+		model.addObject("prios", Prio.values());
+		model.addObject("statuus", Status.values()); 
+		model.addObject("anfrage", new Anfrage());
+		return model;
+	}
+	
+	@PostMapping("/neueAnfrage")
+	public String neueAnfrageBearbeiten(@ModelAttribute("anfrage") Anfrage anfrage) {
+		anfrage.heuteGestellt();
+		log.debug("neue Anfrage: {}", anfrage);
+		return "redirect:/";
 	}
 }

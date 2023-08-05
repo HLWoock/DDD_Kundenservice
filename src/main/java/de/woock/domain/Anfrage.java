@@ -10,8 +10,6 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 import de.woock.Kundenservice;
 import lombok.Data;
@@ -52,6 +50,17 @@ public class Anfrage extends    Vorgang
 		return Kundenservice.vorgaengeOrdner.abheften(this);	
 	}
 
+	public Vorgang heuteGestellt() {
+		this.von     = String.format("%1$te %1$tb %1$tY  %1$tH:%1$tM", new Date());
+		this.status  = AUFGENOMMEN;
+		this.prio    = HOCH;
+		return Kundenservice.vorgaengeOrdner.abheften(this);	
+	}
+	
+	public Vorgang aktualisiert() {
+		return Kundenservice.vorgaengeOrdner.abheften(this);	
+	}
+	
 	public Anfrage weiterleitenAn(Abteilungen abteilung) {
 		Kundenservice.vorgaengeBoard.neuenVorgangAnheften(this, abteilung);
 		return this;
