@@ -26,12 +26,12 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 public class AnfragenMVCController {
 	
-	private AnfragenService vorgangService;
+	private AnfragenService anfragenService;
 
 	@GetMapping({"/", "/index"})
     public ModelAndView home() {
     	ModelAndView model = new ModelAndView("index");
-    	model.addObject("anfragen", vorgangService.alleAnfragen());
+    	model.addObject("anfragen", anfragenService.alleAnfragen());
         return model;
     }
 	
@@ -43,7 +43,7 @@ public class AnfragenMVCController {
 	@GetMapping("/anfrage/{anfrageId}/bearbeiten")
 	public ModelAndView anfrageBearbeitenForm(@PathVariable Long anfrageId) {
 		ModelAndView model = new ModelAndView("anfrageBearbeiten");
-		Anfrage anfrage = vorgangService.anfrage(anfrageId);
+		Anfrage anfrage = anfragenService.anfrage(anfrageId);
 		
 		model.addObject("prios", Prio.values());
 		model.addObject("statuus", Status.values()); 
@@ -55,11 +55,7 @@ public class AnfragenMVCController {
 	@PostMapping("/anfrage/{anfrageId}/bearbeiten")
 	public String anfrageBearbeiten(@ModelAttribute("anfrage") Anfrage anfrage) {
 		log.debug("Anfrage {}/{} fertig bearbeitet", anfrage.getId(), anfrage.getVersion());
-		try {
-			anfrage.aktualisiert();
-		} catch (ObjectOptimisticLockingFailureException ex) {
-			log.error("Anfrage {}/{} wird gerade von jemand anderem bearbeitet", anfrage.getId(), anfrage.getVersion());
-		}
+		anfragenService.anfrageAktualisiert(anfrage);
 		return "redirect:/";
 	}
 	
