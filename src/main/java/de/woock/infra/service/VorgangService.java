@@ -7,12 +7,16 @@ import org.springframework.stereotype.Service;
 import de.woock.domain.Anfrage;
 import de.woock.domain.Beschwerde;
 import de.woock.domain.Vorgang;
+import de.woock.infra.repository.AnfrageReposity;
 import de.woock.infra.repository.VorgangRepository;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 @Service
 public class VorgangService {
 	
 	private VorgangRepository vorgangRepository;
+	private AnfrageReposity   anfrageReposity;
 
 	public List<Anfrage> alleAnfragen() {
 		return Anfrage.liste();
@@ -28,5 +32,9 @@ public class VorgangService {
 		vorgaenge.addAll(vorgaenge);
 		
 		return vorgaenge;
+	}
+
+	public Anfrage anfrage(Long anfrageId) {
+		return anfrageReposity.findById(anfrageId).orElse(new Anfrage());
 	}
 }

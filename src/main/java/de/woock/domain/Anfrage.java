@@ -1,6 +1,6 @@
 package de.woock.domain;
 
-import static de.woock.domain.Prio.hoch;
+import static de.woock.domain.Prio.HOCH;
 import static de.woock.domain.Status.AUFGENOMMEN;
 
 import java.io.Serializable;
@@ -10,7 +10,8 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.Transient;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import de.woock.Kundenservice;
 import lombok.Data;
@@ -25,24 +26,29 @@ import lombok.NoArgsConstructor;
 public class Anfrage extends    Vorgang 
                      implements Serializable {
 
-								 @Transient
-								 private Speichern speichern;
-	                             private String anfrage;
-	                             private String antwort;
-	                             private Date   von;
-	                             private Prio   prio;
-	@Enumerated(EnumType.STRING) private Status status;
+	//@NotBlank(message = "Anfrage kann nicht leer sein")
+	private String frage;
 	
-	public Anfrage(String text, Speichern speichern) {
-		this.anfrage = text;
+	//@Size(min = 3, max = 50)     
+	private String antwort;
+    
+	private String von;
+	
+	private Prio   prio;
+	
+	@Enumerated(EnumType.STRING) 
+	private Status status;
+	
+	public Anfrage(String text) {
+		this.frage = text;
 	}
 	
 
 	public Vorgang stellen(String anfrage) {
-		this.anfrage = anfrage;
-		this.von     = new Date();
+		this.frage = anfrage;
+		this.von     = String.format("%1$te %1$tb %1$tY  %1$tH:%1$tM", new Date());
 		this.status  = AUFGENOMMEN;
-		this.prio    = hoch;
+		this.prio    = HOCH;
 		return Kundenservice.vorgaengeOrdner.abheften(this);	
 	}
 

@@ -7,11 +7,12 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import de.woock.domain.Anfrage;
 import de.woock.domain.Beschwerde;
-import de.woock.domain.VorgaengeOrdner;
 import de.woock.domain.VorgaengeBoard;
+import de.woock.domain.VorgaengeOrdner;
 
 @SpringBootApplication
 public class Kundenservice {
