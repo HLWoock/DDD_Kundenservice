@@ -105,6 +105,10 @@
 						    <label for="id">Frage</label>
 							<@spring.formTextarea "anfrage.frage" "rows='4' cols='60'" /> <br />
 						</div><br>
+					    <div class="form-group">
+					        <label for="prio">Prio</label>
+					        <@spring.formSingleSelect "anfrage.prio" prios "style='width:200px'" />
+					    </div><br>						
 						<div class="form-group">
 						    <label for="anfrage">Antwort</label>
 							<@spring.formTextarea "anfrage.antwort" "rows='4' cols='60'" /> <br />

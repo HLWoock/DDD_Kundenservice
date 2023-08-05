@@ -53,7 +53,6 @@ public class Anfrage extends    Vorgang
 	public Vorgang heuteGestellt() {
 		this.von     = String.format("%1$te %1$tb %1$tY  %1$tH:%1$tM", new Date());
 		this.status  = AUFGENOMMEN;
-		this.prio    = HOCH;
 		return Kundenservice.vorgaengeOrdner.abheften(this);	
 	}
 	
