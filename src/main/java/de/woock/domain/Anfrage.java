@@ -10,10 +10,6 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import de.woock.Kundenservice;
 import lombok.Data;
@@ -28,18 +24,11 @@ import lombok.NoArgsConstructor;
 public class Anfrage extends    Vorgang 
                      implements Serializable {
 
-	@NotBlank(message = "Anfrage kann nicht leer sein!")
 	private String frage;
-	
 	private String antwort;
-    
-	@NotBlank(message = "Es muss ein Datum gesetzt sein!")
 	private String von;
-	
-	@NotNull
 	private Prio   prio;
 	
-	@NotNull
 	@Enumerated(EnumType.STRING) 
 	private Status status;
 	

@@ -97,9 +97,8 @@
 		<div class="row">
 			<div class="col-lg-12 col-md-10 mx-auto">
 				<fieldset>
+				    <@spring.bind "prios"/>
 					<h1>Anfrage:</h1>
-					<@spring.bind "prios"/>
-					<@spring.bind "statuus"/>
 					<form name="anfrage" action="" method="POST" modelAttribute="anfrage">
 						<div class="form-group">
 						    <label for="id">Frage</label>

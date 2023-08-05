@@ -1,7 +1,5 @@
 package de.woock.infra.controller;
 
-import javax.validation.Valid;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -68,7 +66,7 @@ public class AnfragenMVCController {
 	}
 	
 	@PostMapping("/neueAnfrage")
-	public String neueAnfrageBearbeiten(@Valid @ModelAttribute("anfrage") Anfrage anfrage, BindingResult result, Model model) {
+	public String neueAnfrageBearbeiten(@ModelAttribute("anfrage") Anfrage anfrage, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return "/neueAnfrage";
 		}
