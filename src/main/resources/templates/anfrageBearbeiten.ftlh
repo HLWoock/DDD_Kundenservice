@@ -10,7 +10,7 @@
         
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
         
-        <title>Anfrage</title>
+        <title>Anfrage bearbeiten</title>
         
         <!-- Bootstrap core CSS -->
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -78,14 +78,14 @@
 
 	<!-- Page Header -->
 	<header class="masthead"
-		style="background-image: url('/assets/img/anfrage-bg.jpg')">
+		style="background-image: url('/assets/img/bearbeiten-bg.jpg')">
 		<div class="overlay"></div>
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 col-md-10 mx-auto">
 					<div class="site-heading">
-						<h1>StattAuto</h1>
-						<span class="subheading">Anfrage</span>
+						<h1 class="dark_header">StattAuto</h1>
+						<span class="subheading">Anfrage :: bearbeiten</span>
 					</div>
 				</div>
 			</div>

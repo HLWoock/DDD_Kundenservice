@@ -85,7 +85,7 @@
 				<div class="col-lg-8 col-md-10 mx-auto">
 					<div class="site-heading">
 						<h1>StattAuto</h1>
-						<span class="subheading">Anfrage</span>
+						<span class="subheading">Anfrage :: stellen</span>
 					</div>
 				</div>
 			</div>
