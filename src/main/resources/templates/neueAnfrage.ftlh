@@ -55,105 +55,104 @@
 		</style>
     </head>
 
-<body>
-
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
-    <div class="container" px-4 px-lg-5>
-      <a class="navbar-brand" href="/">StattAuto</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        Menu
-        <i class="fas fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ms-auto py-4 py-lg-0">
-          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="contact.html">Kontakt</a>
-          <li class="nav-item"><a class="nav-link" href="post.html">News</a>
-          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-	<!-- Page Header -->
-	<header class="masthead"
-		style="background-image: url('/assets/img/anfrage-bg.jpg')">
-		<div class="overlay"></div>
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8 col-md-10 mx-auto">
-					<div class="site-heading">
-						<h1>StattAuto</h1>
-						<span class="subheading">Anfrage :: stellen</span>
+	<body>
+	
+	  <!-- Navigation -->
+	  <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+	    <div class="container" px-4 px-lg-5>
+	      <a class="navbar-brand" href="/">StattAuto</a>
+	                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+	        Menu
+	        <i class="fas fa-bars"></i>
+	      </button>
+	      <div class="collapse navbar-collapse" id="navbarResponsive">
+	        <ul class="navbar-nav ms-auto py-4 py-lg-0">
+	          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+	          <li class="nav-item"><a class="nav-link" href="contact.html">Kontakt</a>
+	          <li class="nav-item"><a class="nav-link" href="post.html">News</a>
+	          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+	
+		<!-- Page Header -->
+		<header class="masthead"
+			style="background-image: url('/assets/img/anfrage-bg.jpg')">
+			<div class="overlay"></div>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8 col-md-10 mx-auto">
+						<div class="site-heading">
+							<h1>StattAuto</h1>
+							<span class="subheading">Anfrage :: stellen</span>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</header>
-
-	<!-- Main Content -->
-	<div id="place" class="container">
-		<div class="row">
-			<div class="col-lg-12 col-md-10 mx-auto">
-				<fieldset>
-				    <@spring.bind "prios"/>
-					<h1>Anfrage:</h1>
-					<form name="anfrage" action="" method="POST" modelAttribute="anfrage">
-						<div class="form-group">
-						    <label for="id">Frage</label>
-							<@spring.formTextarea "anfrage.frage" "rows='4' cols='60'" /> <br />
-						</div><br>
-					    <div class="form-group">
-					        <label for="prio">Prio</label>
-					        <@spring.formSingleSelect "anfrage.prio" prios "style='width:200px'" />
-					    </div><br>						
-						<div class="form-group">
-						    <label for="anfrage">Antwort</label>
-							<@spring.formTextarea "anfrage.antwort" "rows='4' cols='60'" /> <br />
-						</div><br>
-						
-						<input type="submit" value="Stellen" />
-					</form>
-				</fieldset>
-				<br>
-			</div>
-		</div>
-	</div>
-
-	<hr>
-
-	<!-- Footer -->
-	<footer>
-		<div class="container">
+		</header>
+	
+		<!-- Main Content -->
+		<div id="place" class="container">
 			<div class="row">
-				<div class="col-lg-8 col-md-10 mx-auto">
-					<ul class="list-inline text-center">
-						<li class="list-inline-item"><a href="#"> <span
-								class="fa-stack fa-lg"> <i
-									class="fas fa-circle fa-stack-2x"></i> <i
-									class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-							</span>
-						</a></li>
-						<li class="list-inline-item"><a href="#"> <span
-								class="fa-stack fa-lg"> <i
-									class="fas fa-circle fa-stack-2x"></i> <i
-									class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
-							</span>
-						</a></li>
-						<li class="list-inline-item"><a href="#"> <span
-								class="fa-stack fa-lg"> <i
-									class="fas fa-circle fa-stack-2x"></i> <i
-									class="fab fa-github fa-stack-1x fa-inverse"></i>
-							</span>
-						</a></li>
-					</ul>
-					<p class="copyright text-muted">Copyright &copy; oose. eG 2020</p>
+				<div class="col-lg-12 col-md-10 mx-auto">
+					<fieldset>
+						<h1>Anfrage:</h1>
+						<form name="anfrage" action="" method="POST" modelAttribute="anfrage">
+							<div class="form-group">
+							    <label for="id">Frage</label>
+								<@spring.formTextarea "anfrage.frage" "rows='4' cols='60'" /> <br />
+							</div><br>
+						    <div class="form-group">
+						        <label for="prio">Prio</label>
+						        <@spring.formSingleSelect "anfrage.prio" anfrage.prios "style='width:200px'" />
+						    </div><br>						
+							<div class="form-group">
+							    <label for="anfrage">Antwort</label>
+								<@spring.formTextarea "anfrage.antwort" "rows='4' cols='60'" /> <br />
+							</div><br>
+							
+							<input type="submit" value="Stellen" />
+						</form>
+					</fieldset>
+					<br>
 				</div>
 			</div>
 		</div>
-	</footer>
-		
-</body>
+	
+		<hr>
+	
+		<!-- Footer -->
+		<footer>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8 col-md-10 mx-auto">
+						<ul class="list-inline text-center">
+							<li class="list-inline-item"><a href="#"> <span
+									class="fa-stack fa-lg"> <i
+										class="fas fa-circle fa-stack-2x"></i> <i
+										class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+								</span>
+							</a></li>
+							<li class="list-inline-item"><a href="#"> <span
+									class="fa-stack fa-lg"> <i
+										class="fas fa-circle fa-stack-2x"></i> <i
+										class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+								</span>
+							</a></li>
+							<li class="list-inline-item"><a href="#"> <span
+									class="fa-stack fa-lg"> <i
+										class="fas fa-circle fa-stack-2x"></i> <i
+										class="fab fa-github fa-stack-1x fa-inverse"></i>
+								</span>
+							</a></li>
+						</ul>
+						<p class="copyright text-muted">Copyright &copy; oose. eG 2020</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+			
+	</body>
 
 </html>

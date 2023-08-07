@@ -45,12 +45,6 @@ public class Anfrage extends    Vorgang
 		return Kundenservice.vorgaengeOrdner.abheften(this);	
 	}
 
-	public Vorgang heuteGestellt() {
-		this.von     = String.format("%1$te %1$tb %1$tY  %1$tH:%1$tM", new Date());
-		this.status  = AUFGENOMMEN;
-		return Kundenservice.vorgaengeOrdner.abheften(this);	
-	}
-	
 	public Vorgang aktualisiert() {
 		return Kundenservice.vorgaengeOrdner.abheften(this);	
 	}

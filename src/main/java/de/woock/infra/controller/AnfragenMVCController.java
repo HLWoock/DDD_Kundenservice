@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import de.woock.domain.Anfrage;
 import de.woock.domain.Prio;
 import de.woock.domain.Status;
+import de.woock.infra.dto.AnfrageDto;
 import de.woock.infra.service.AnfragenService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -48,25 +49,23 @@ public class AnfragenMVCController {
 	}
 	
 	@PostMapping("/anfrage/{anfrageId}/bearbeiten")
-	public String anfrageBearbeiten(@ModelAttribute("anfrage") Anfrage anfrage) {
-		log.debug("Anfrage {}/{} fertig bearbeitet", anfrage.getId(), anfrage.getVersion());
-		anfragenService.anfrageAktualisiert(anfrage);
+	public String anfrageBearbeiten(@ModelAttribute("anfrage") AnfrageDto anfrageDto) {
+		log.debug("Anfrage {}/{} fertig bearbeitet", anfrageDto.getId(), anfrageDto.getVersion());
+		anfragenService.anfrageAktualisiert(anfrageDto);
 		return "redirect:/";
 	}
 	
 	@GetMapping("/neueAnfrage")
 	public ModelAndView neueAnfrageBearbeitenForm() {
 		ModelAndView model = new ModelAndView("neueAnfrage");
-		model.addObject("prios", Prio.values());
-		model.addObject("statuus", Status.values()); 
-		model.addObject("anfrage", new Anfrage());
+		model.addObject("anfrage", new AnfrageDto(Prio.values()));
 		return model;
 	}
 	
 	@PostMapping("/neueAnfrage")
-	public String neueAnfrageBearbeiten(@ModelAttribute("anfrage") Anfrage anfrage) {
-		anfrage.heuteGestellt();
-		log.debug("neue Anfrage: {}", anfrage);
+	public String neueAnfrageBearbeiten(@ModelAttribute("anfrage") AnfrageDto anfrageDto) {
+		anfragenService.heuteGestellt(anfrageDto);
+		log.debug("neue Anfrage: {}", anfrageDto);
 		return "redirect:/";
 	}
 }

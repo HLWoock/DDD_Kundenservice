@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import de.woock.domain.Anfrage;
 import de.woock.domain.Beschwerde;
 import de.woock.domain.Vorgang;
+import de.woock.infra.dto.AnfrageDto;
 import de.woock.infra.repository.AnfrageReposity;
 import de.woock.infra.repository.VorgangRepository;
 import lombok.AllArgsConstructor;
@@ -37,17 +38,33 @@ public class AnfragenService {
 		return vorgaenge;
 	}
 	
-	public void anfrageAktualisiert(Anfrage anfrage) {
-		log.debug("Anfrage {}/{} wird aktualisiert", anfrage.getId(), anfrage.getVersion());
+	public void anfrageAktualisiert(AnfrageDto anfrageDto) {
+		log.debug("Anfrage {}/{} wird aktualisiert", anfrageDto.getId(), anfrageDto.getVersion());
 
+		Anfrage anfrage = konvertiere(anfrageDto);
 		try {
 			anfrage.aktualisiert();
 		} catch (ObjectOptimisticLockingFailureException ex) {
-			log.error("Anfrage {}/{} wird gerade von jemand anderem bearbeitet", anfrage.getId(), anfrage.getVersion());
+			log.error("Anfrage {}/{} wird gerade von jemand anderem bearbeitet", anfrageDto.getId(), anfrageDto.getVersion());
 		}
 	}
 
 	public Anfrage anfrage(Long anfrageId) {
 		return anfrageReposity.findById(anfrageId).orElse(new Anfrage());
+	}
+
+	public void heuteGestellt(AnfrageDto anfrageDto) {
+		Anfrage anfrage = konvertiere(anfrageDto);
+		anfrage.stellen(anfrageDto.getFrage());
+		
+	}
+
+	private Anfrage konvertiere(AnfrageDto anfrageDto) {
+		Anfrage anfrage = new Anfrage(anfrageDto.getFrage());
+		anfrage.setAntwort(anfrageDto.getAntwort());
+		anfrage.setId     (anfrageDto.getId());
+		anfrage.setVersion(anfrageDto.getVersion());
+		anfrage.setPrio   (anfrageDto.getPrio());
+		return anfrage;
 	}
 }
