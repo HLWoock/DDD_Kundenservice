@@ -1,8 +1,6 @@
 package de.woock.infra.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -66,10 +64,7 @@ public class AnfragenMVCController {
 	}
 	
 	@PostMapping("/neueAnfrage")
-	public String neueAnfrageBearbeiten(@ModelAttribute("anfrage") Anfrage anfrage, BindingResult result, Model model) {
-		if (result.hasErrors()) {
-			return "/neueAnfrage";
-		}
+	public String neueAnfrageBearbeiten(@ModelAttribute("anfrage") Anfrage anfrage) {
 		anfrage.heuteGestellt();
 		log.debug("neue Anfrage: {}", anfrage);
 		return "redirect:/";
