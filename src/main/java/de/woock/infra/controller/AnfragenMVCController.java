@@ -51,7 +51,7 @@ public class AnfragenMVCController {
 	@PostMapping("/anfrage/{anfrageId}/bearbeiten")
 	public String anfrageBearbeiten(@ModelAttribute("anfrage") AnfrageDto anfrageDto) {
 		log.debug("Anfrage {}/{} fertig bearbeitet", anfrageDto.getId(), anfrageDto.getVersion());
-		anfragenService.anfrageAktualisiert(anfrageDto);
+		anfragenService.anfrageAktualisiert(konvertiere(anfrageDto));
 		return "redirect:/";
 	}
 	
@@ -64,8 +64,17 @@ public class AnfragenMVCController {
 	
 	@PostMapping("/neueAnfrage")
 	public String neueAnfrageBearbeiten(@ModelAttribute("anfrage") AnfrageDto anfrageDto) {
-		anfragenService.heuteGestellt(anfrageDto);
+		anfragenService.heuteGestellt(konvertiere(anfrageDto));
 		log.debug("neue Anfrage: {}", anfrageDto);
 		return "redirect:/";
+	}
+	
+	private Anfrage konvertiere(AnfrageDto anfrageDto) {
+		Anfrage anfrage = new Anfrage(anfrageDto.getFrage());
+		anfrage.setAntwort(anfrageDto.getAntwort());
+		anfrage.setId     (anfrageDto.getId());
+		anfrage.setVersion(anfrageDto.getVersion());
+		anfrage.setPrio   (anfrageDto.getPrio());
+		return anfrage;
 	}
 }
