@@ -1,6 +1,8 @@
 package de.woock.infra.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,6 +15,7 @@ import de.woock.domain.Prio;
 import de.woock.domain.Status;
 import de.woock.infra.dto.AnfrageDto;
 import de.woock.infra.service.AnfragenService;
+import de.woock.infra.validator.AnfrageValidation;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -44,7 +47,7 @@ public class AnfragenMVCController {
 		model.addObject("prios", Prio.values());
 		model.addObject("statuus", Status.values()); 
 		model.addObject("anfrage", anfrage);
-		log.debug("Anfrage {}/{} wird gerade zur Bearbeitung in die Anzeige gebracht", anfrage.getId(), anfrageId);
+		log.debug("Anfrage {}/{} wird gerade zur Bearbeitung in die Anzeige gebracht", anfrage.getId(), anfrage.getVersion());
 		return model;
 	}
 	
@@ -63,9 +66,17 @@ public class AnfragenMVCController {
 	}
 	
 	@PostMapping("/neueAnfrage")
-	public String neueAnfrageBearbeiten(@ModelAttribute("anfrage") AnfrageDto anfrageDto) {
-		anfragenService.heuteGestellt(konvertiere(anfrageDto));
-		log.debug("neue Anfrage: {}", anfrageDto);
+	public String neueAnfrageBearbeiten(@ModelAttribute("anfrage") AnfrageDto anfrageDto, BindingResult result, Model model) {
+		log.debug("neue Anfrage: '{}' mit Prio {} wird  gestellt", anfrageDto.getFrage(), anfrageDto.getPrio());
+		Anfrage anfrage = konvertiere(anfrageDto);
+		new AnfrageValidation().validate(anfrage, result);
+		if (result.hasErrors()) {
+			log.error("es {} {} Fehler beim Anlegen einer Anfrage aufgetreten.", result.getErrorCount()==1 ? "ist": "sind", result.getErrorCount());
+			((AnfrageDto)model.getAttribute("anfrage")).setPrios(Prio.values());
+			return "/neueAnfrage";
+		}
+		anfragenService.heuteGestellt(anfrage);
+		log.debug("neue Anfrage: {}", anfrage);
 		return "redirect:/";
 	}
 	

@@ -23,6 +23,8 @@ spring:
     show-sql: false
   main:
     allow-bean-definition-overriding: true
+
+
   
 management:
   endpoints:

@@ -52,6 +52,9 @@
 		        padding: 5px;
 		        margin: 10px;
 		    }
+            .error {
+                color: red;
+            }
 		</style>
     </head>
 
@@ -101,7 +104,8 @@
 						<form name="anfrage" action="" method="POST" modelAttribute="anfrage">
 							<div class="form-group">
 							    <label for="id">Frage</label>
-								<@spring.formTextarea "anfrage.frage" "rows='4' cols='60'" /> <br />
+								<@spring.formTextarea "anfrage.frage" "rows='4' cols='60'" />
+								<@spring.showErrors "<br>" "error"/>
 							</div><br>
 						    <div class="form-group">
 						        <label for="prio">Prio</label>

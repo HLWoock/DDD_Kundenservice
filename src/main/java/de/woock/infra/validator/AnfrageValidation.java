@@ -1,8 +1,10 @@
-package de.woock.domain;
+package de.woock.infra.validator;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
+
+import de.woock.domain.Anfrage;
 
 public class AnfrageValidation implements Validator {
 
@@ -12,12 +14,12 @@ public class AnfrageValidation implements Validator {
 	}
 
 	public void validate(Object obj, Errors e) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(e, "frage", "Darf nicht leer sein.");
+	    ValidationUtils.rejectIfEmptyOrWhitespace(e, "frage", "feld.nicht.leer");
+		
 		Anfrage anfrage = (Anfrage) obj;
-		if (anfrage.getFrage().isBlank()) {
-			e.rejectValue("frage", "Darf nicht leer sein.");
-		} else if (anfrage.getId() > 0) {
-			e.rejectValue("id", "muss gesetzt sein");
+		int zeichen = anfrage.getFrage().length();
+		if (zeichen > 0 && zeichen < 4) {
+			e.rejectValue("frage", "frage.sinnvoll");
 		}
 	}
 }

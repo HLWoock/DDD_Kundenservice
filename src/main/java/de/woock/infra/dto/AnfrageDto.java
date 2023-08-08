@@ -10,6 +10,7 @@ public class AnfrageDto {
 	
 	private Long id;
 	private int version;
+	
 	private String frage;
 	private String antwort;
 	private String von;
