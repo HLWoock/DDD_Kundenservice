@@ -26,33 +26,6 @@
         
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="/css/styles.css" rel="stylesheet" />
-        
-        <style type="text/css">
-		    label {
-		        display: inline-block;
-		        width: 200px;
-		        margin: 5px;
-		        text-align: left;
-		    }
-		    input[type=text], input[type=password], select {
-		        display: inline-block;
-		        width: 200px;
-		    }
-		    input[type=submit], select {
-		        display: inline-block;
-		        width: 200px;
-		    }
-		    input[type=radio] {
-		        margin-left: 45px;
-		    }
-		    input[type=checkbox] {
-		        margin-right: 190px;
-		    }  
-		    button {
-		        padding: 5px;
-		        margin: 10px;
-		    }
-		</style>
     </head>
 
 <body>
