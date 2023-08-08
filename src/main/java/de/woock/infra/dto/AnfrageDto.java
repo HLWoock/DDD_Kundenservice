@@ -13,6 +13,7 @@ public class AnfrageDto {
 	
 	private String frage;
 	private String antwort;
+	private String kunde;
 	private String von;
 	private Prio   prio;
 	private Prio[] prios;

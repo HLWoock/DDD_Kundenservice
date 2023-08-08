@@ -75,6 +75,11 @@
 							  <@spring.formTextarea "anfrage.frage" "rows='4' cols='60'" />
 							  <@spring.showErrors "<br>" "error"/>
 						  </div><br>
+					      <div class="form-group">
+						      <label for="id">Von</label>
+							  <@spring.formInput "anfrage.von" />
+							  <@spring.formInput "anfrage.kunde" "readonly='true' style='width:370px'" "text" />
+						  </div><br/>
 						  <div class="form-group">
 						      <label for="prio">Prio</label>
 						      <@spring.formSingleSelect "anfrage.prio" anfrage.prios "style='width:200px'" />
