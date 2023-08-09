@@ -10,10 +10,21 @@
         
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
         
+        <script type="text/javascript">
+      		$(function(){
+      			$('#von').keyup(function(e) {
+        			$('#kunde').val('xxx');
+        			var url = "http://localhost:8082/api/mitglied/id/" +  $(this).val() + "/name";
+					console.log(url);
+					$.get(url, function(data) {
+					    $('#kunde').val(data);
+					});
+      			});
+      		});
+        </script>        
         <title>Anfrage</title>
         
         <!-- Bootstrap core CSS -->
-        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
         
         <!-- Font Awesome icons (free version)-->
@@ -68,7 +79,7 @@
 	      <div class="row">
 		      <div class="col-lg-12 col-md-10 mx-auto">
 			      <fieldset>
-				      <h1>Anfrage:</h1>
+				      <h1>neue Anfrage:</h1>
 					  <form name="anfrage" action="" method="POST" modelAttribute="anfrage">
 					      <div class="form-group">
 						      <label for="id">Frage</label>

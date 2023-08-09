@@ -13,7 +13,6 @@
         <title>Anfrage bearbeiten</title>
         
         <!-- Bootstrap core CSS -->
-        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
         
         <!-- Font Awesome icons (free version)-->
