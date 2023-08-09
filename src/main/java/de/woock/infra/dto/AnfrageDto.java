@@ -16,9 +16,8 @@ public class AnfrageDto {
 	private String kunde;
 	private String von;
 	private Prio   prio;
-	private Prio[] prios;
 	
-	public AnfrageDto(Prio[] prios) {
-		this.prios = prios;
+	public Prio[] getPrios() {
+		return Prio.values();
 	}
 }

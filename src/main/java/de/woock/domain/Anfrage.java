@@ -12,6 +12,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 import de.woock.Kundenservice;
+import de.woock.domain.ausnahmen.LeeresFeldException;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -32,13 +33,16 @@ public class Anfrage extends    Vorgang
 	@Enumerated(EnumType.STRING) 
 	private Status status;
 	
-	public Anfrage(String text) {
-		this.frage = text;
-	}
-	
+	public Anfrage(String frage) throws LeeresFeldException {
+		if (frage == null || frage.isBlank()) {
+			throw new LeeresFeldException("frage");
+		}
 
-	public Vorgang stellen(String anfrage) {
-		this.frage = anfrage;
+		this.frage = frage;
+	}
+
+	public Vorgang stellen(String frage) {
+		this.frage   = frage;
 		this.von     = String.format("%1$te %1$tb %1$tY  %1$tH:%1$tM", new Date());
 		this.status  = AUFGENOMMEN;
 		this.prio    = HOCH;

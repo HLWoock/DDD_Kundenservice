@@ -3,6 +3,7 @@ package de.woock.infra.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,9 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 import de.woock.domain.Anfrage;
 import de.woock.domain.Prio;
 import de.woock.domain.Status;
+import de.woock.domain.ausnahmen.LeeresFeldException;
 import de.woock.infra.dto.AnfrageDto;
 import de.woock.infra.service.AnfragenService;
-import de.woock.infra.validator.AnfrageValidation;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -54,25 +55,32 @@ public class AnfragenMVCController {
 	@PostMapping("/anfrage/{anfrageId}/bearbeiten")
 	public String anfrageBearbeiten(@ModelAttribute("anfrage") AnfrageDto anfrageDto) {
 		log.debug("Anfrage {}/{} fertig bearbeitet", anfrageDto.getId(), anfrageDto.getVersion());
-		anfragenService.anfrageAktualisiert(konvertiere(anfrageDto));
+		try {
+			anfragenService.anfrageAktualisiert(konvertiere(anfrageDto));
+		} catch (LeeresFeldException e) {
+			e.printStackTrace();
+		} 
 		return "redirect:/";
 	}
 	
 	@GetMapping("/neueAnfrage")
 	public ModelAndView neueAnfrageForm() {
 		ModelAndView model = new ModelAndView("neueAnfrage");
-		model.addObject("anfrage", new AnfrageDto(Prio.values()));
+		model.addObject("anfrage", new AnfrageDto());
 		return model;
 	}
 	
 	@PostMapping("/neueAnfrage")
 	public String neueAnfrage(@ModelAttribute("anfrage") AnfrageDto anfrageDto, BindingResult result, Model model) {
-		log.debug("neue Anfrage: '{}' mit Prio {} wird  gestellt", anfrageDto.getFrage(), anfrageDto.getPrio());
-		Anfrage anfrage = konvertiere(anfrageDto);
-		new AnfrageValidation().validate(anfrage, result);
+		log.debug("neue Anfrage: '{}' mit Prio {} wird gestellt", anfrageDto.getFrage(), anfrageDto.getPrio());
+		Anfrage anfrage = null;
+		try {
+			anfrage = konvertiere(anfrageDto);
+		} catch (LeeresFeldException e) {
+			ValidationUtils.rejectIfEmptyOrWhitespace(result, e.feld(), "feld.nicht.leer");
+		}
 		if (result.hasErrors()) {
 			log.error("es {} {} Fehler beim Anlegen einer Anfrage aufgetreten.", result.getErrorCount()==1 ? "ist": "sind", result.getErrorCount());
-			((AnfrageDto)model.getAttribute("anfrage")).setPrios(Prio.values());
 			return "/neueAnfrage";
 		}
 		anfragenService.heuteGestellt(anfrage);
@@ -80,7 +88,7 @@ public class AnfragenMVCController {
 		return "redirect:/";
 	}
 	
-	private Anfrage konvertiere(AnfrageDto anfrageDto) {
+	private Anfrage konvertiere(AnfrageDto anfrageDto) throws LeeresFeldException {
 		Anfrage anfrage = new Anfrage(anfrageDto.getFrage());
 		anfrage.setAntwort(anfrageDto.getAntwort());
 		anfrage.setId     (anfrageDto.getId());
