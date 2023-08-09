@@ -48,8 +48,7 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ms-auto py-4 py-lg-0">
           <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="anfragen/">Anfragen</a></li>
-          <li class="nav-item"><a class="nav-link" href="beschwerden/">Beschwerden</a></li>
+          <li class="nav-item"><a class="nav-link" href="anfrage/suchen/">Anfrage beantworten</a></li>
           <li class="nav-item"><a class="nav-link" href="contact.html">Kontakt</a>
           <li class="nav-item"><a class="nav-link" href="post.html">News</a>
           <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
@@ -59,7 +58,8 @@
   </nav>
 
   <!-- Page Header -->
-  <header class="masthead" style="background-image: url('assets/img/home-bg.jpg')">
+  <header class="masthead" 
+    style="background-image: url('/assets/img/anfragen-bg.jpg')">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
@@ -77,24 +77,35 @@
   <div id="place" class="container">
     <div class="row">
       <div class="col-lg-12 col-md-10 mx-auto">
-	    	<h1>Kundenservice</h1>
- <table>
-  <tr>
-    <th>Company</th>
-    <th>Contact</th>
-    <th>Country</th>
-  </tr>
-  <tr>
-    <td>Alfreds Futterkiste</td>
-    <td>Maria Anders</td>
-    <td>Germany</td>
-  </tr>
-  <tr>
-    <td>Centro comercial Moctezuma</td>
-    <td>Francisco Chang</td>
-    <td>Mexico</td>
-  </tr>
-</table> 	    	
+	    	<h1>Anfragenordner</h1>
+			<table class="table table-striped" border="1">
+			    <tr>
+			        <th>Anfragen Nr.</th>
+			        <th style="display:none;">Version</th>
+			        <th>Frage</th>
+			        <th>Antwort</th>
+			        <th>Prio</th>
+			        <th>Aktion</th>
+			    </tr>
+			    <#list anfragen as anfrage>
+					<tr>
+					    <td>${anfrage.id}</td>
+					    <td style="display:none;">${anfrage.version}</td>
+					    <td>${anfrage.frage}</td>
+					    <td>${anfrage.antwort}</td>
+					    <td>${anfrage.prio}</td>
+					    <td><button               type="button" class="edit material-icons"><i class="fas fa-edit"></i></button>
+                            <button               type="button" class="delete material-icons"><i class="far fa-trash-alt"></i></button>
+                            <button id="bn_check" type="button" class="check material-icons"><i class="fas fa-check"></i></button>
+                            <button               type="button" class="export material-icons"><i class="fas fa-file-export"></i></button></td>
+			        </tr>
+				</#list>
+			</table>
+		    <br>
+		    <form method="get" action="/neueAnfrage" >
+		   		<button id="bottom" type="submit" background-color="blue">Neue Anfrage stellen</button>
+			</form>
+			<br>
       </div>
     </div>
   </div>

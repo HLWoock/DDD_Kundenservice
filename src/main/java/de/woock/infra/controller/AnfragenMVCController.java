@@ -28,18 +28,13 @@ public class AnfragenMVCController {
 	
 	private AnfragenService anfragenService;
 
-	@GetMapping({"/", "/index"})
-    public ModelAndView home() {
-    	ModelAndView model = new ModelAndView("index");
+		@GetMapping({"/anfragen"})
+    public ModelAndView anfragen() {
+    	ModelAndView model = new ModelAndView("anfragen");
     	model.addObject("anfragen", anfragenService.alleAnfragen());
         return model;
     }
 	
-	@GetMapping("/about")
-	public String about() {
-		return "about";
-	}
-
 	@GetMapping("/anfrage/{anfrageId}/bearbeiten")
 	public ModelAndView anfrageBearbeitenForm(@PathVariable Long anfrageId) {
 		ModelAndView model = new ModelAndView("anfrageBearbeiten");
