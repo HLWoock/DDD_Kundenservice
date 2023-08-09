@@ -59,14 +59,14 @@ public class AnfragenMVCController {
 	}
 	
 	@GetMapping("/neueAnfrage")
-	public ModelAndView neueAnfrageBearbeitenForm() {
+	public ModelAndView neueAnfrageForm() {
 		ModelAndView model = new ModelAndView("neueAnfrage");
 		model.addObject("anfrage", new AnfrageDto(Prio.values()));
 		return model;
 	}
 	
 	@PostMapping("/neueAnfrage")
-	public String neueAnfrageBearbeiten(@ModelAttribute("anfrage") AnfrageDto anfrageDto, BindingResult result, Model model) {
+	public String neueAnfrage(@ModelAttribute("anfrage") AnfrageDto anfrageDto, BindingResult result, Model model) {
 		log.debug("neue Anfrage: '{}' mit Prio {} wird  gestellt", anfrageDto.getFrage(), anfrageDto.getPrio());
 		Anfrage anfrage = konvertiere(anfrageDto);
 		new AnfrageValidation().validate(anfrage, result);
