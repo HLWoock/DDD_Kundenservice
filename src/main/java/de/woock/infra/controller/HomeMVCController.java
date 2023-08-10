@@ -13,12 +13,17 @@ import lombok.AllArgsConstructor;
 @Controller
 public class HomeMVCController {
 	
-	private VorgangService anfragenService;
+	private VorgangService vorgangService;
 
 	@GetMapping({"/", "/index"})
     public ModelAndView home() {
     	ModelAndView model = new ModelAndView("index");
-    	model.addObject("anfragen", anfragenService.alleAnfragen());
+    	
+    	int anfragen    = vorgangService.alleAnfragen().size();
+    	int beschwerden = vorgangService.alleBeschwerden().size();
+    	
+    	model.addObject("anfragen", anfragen);
+    	model.addObject("beschwerden", beschwerden);
         return model;
     }
 	

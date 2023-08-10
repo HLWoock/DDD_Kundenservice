@@ -66,7 +66,7 @@
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
             <h1>StattAuto</h1>
-            <span class="subheading">Kundenservice :: Anfragen</span>
+            <span class="subheading">Kundenservice :: Vorg&auml;nge</span>
           </div>
         </div>
       </div>
@@ -76,27 +76,27 @@
   <!-- Main Content -->
   <div id="place" class="container">
     <div class="row">
-      <div class="col-lg-12 col-md-10 mx-auto">
+      <div class="col-lg-14 col-md-10 mx-auto">
 	    	<h1>Kundenservice</h1>
-		 <table>
-		  <tr>
-		    <th>Vorgang</th>
-		    <th>offen </th>
-		    <th>abgeschlossen</th>
-		  </tr>
-		  <tr>
-		    <td>Anfragen<td>
-		    <td>10</td>
-		    <td>5</td>
-		  </tr>
-		  <tr>
-		    <td>Beschwerden</td>
-		    <td>8</td>
-		    <td>7</td>
-		  </tr>
-		</table> 	    	
-      </div>
-    </div>
+		    <table>
+		        <tr>
+		            <th>Vorg&auml;nge</th>
+		            <th>offen </th>
+		            <th>bearbeitet</th>
+		        </tr>
+		        <tr>
+		            <td>Anfragen<td>
+		            <td>${anfragen}</td>
+		            <td>5</td>
+		        </tr>
+		        <tr>
+		            <td>Beschwerden</td>
+		            <td>${beschwerden}</td>
+		            <td>7</td>
+		        </tr>
+		    </table> 	    	
+        </div>
+     </div>
   </div>
 
   <hr>
