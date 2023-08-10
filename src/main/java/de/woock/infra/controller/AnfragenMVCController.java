@@ -16,7 +16,7 @@ import de.woock.domain.Prio;
 import de.woock.domain.Status;
 import de.woock.domain.ausnahmen.LeeresFeldException;
 import de.woock.infra.dto.AnfrageDto;
-import de.woock.infra.service.AnfragenService;
+import de.woock.infra.service.VorgangService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -26,7 +26,7 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 public class AnfragenMVCController {
 	
-	private AnfragenService anfragenService;
+	private VorgangService anfragenService;
 
 		@GetMapping({"/anfragen"})
     public ModelAndView anfragen() {

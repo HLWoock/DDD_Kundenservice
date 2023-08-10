@@ -1,7 +1,9 @@
 package de.woock.domain;
 
 import static de.woock.domain.Status.AUFGENOMMEN;
+import static de.woock.domain.Prio.HOCH;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -10,6 +12,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 import de.woock.Kundenservice;
+import de.woock.domain.ausnahmen.LeeresFeldException;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -19,13 +22,24 @@ import lombok.NoArgsConstructor;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Entity
-public class Beschwerde extends Vorgang {
+public class Beschwerde extends Vorgang 
+                        implements Serializable{
 	
     private String beschwerde;
     private String antwort;
     private Date   von;
-@Enumerated(EnumType.STRING) private Status status;
+	private Prio   prio;
+	
+    @Enumerated(EnumType.STRING) 
+    private Status status;
 
+	public Beschwerde(String beschwerde) throws LeeresFeldException {
+		if (beschwerde == null || beschwerde.isBlank()) {
+			throw new LeeresFeldException("frage");
+		}
+
+		this.beschwerde = beschwerde;
+	}
 	@Override
 	public Beschwerde weiterleitenAn(Abteilungen abteilung) {
 		Kundenservice.vorgaengeBoard.neuenVorgangAnheften(this, abteilung);
@@ -36,6 +50,7 @@ public class Beschwerde extends Vorgang {
 		this.beschwerde = beschwerde;
 		this.von        = new Date();
 		this.status     = AUFGENOMMEN;
+		this.prio       = Prio.HOCH;
 		return Kundenservice.vorgaengeOrdner.abheften(this);	
 	}
 
@@ -45,8 +60,8 @@ public class Beschwerde extends Vorgang {
 		Kundenservice.vorgaengeOrdner.updaten(this);
 	}
 	
-	public static List<Vorgang> liste() {
-		return Kundenservice.vorgaengeOrdner.alleVorgaenge();
+	public static List<Beschwerde> liste() {
+		return Kundenservice.vorgaengeOrdner.alleBeschweden();
 	}
 
 }

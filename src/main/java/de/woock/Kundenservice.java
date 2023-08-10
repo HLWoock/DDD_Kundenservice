@@ -39,7 +39,7 @@ public class Kundenservice {
 			
 			new Beschwerde().einreichen("Mein Auto war schmutzig!")
             .weiterleitenAn(Verein)
-            .beantworten("50 Euro");
+            .beantworten("Sie bekommen einen 50€ Gutschein");
 		};
 	}
 

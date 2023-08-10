@@ -78,23 +78,23 @@
     <div class="row">
       <div class="col-lg-12 col-md-10 mx-auto">
 	    	<h1>Kundenservice</h1>
- <table>
-  <tr>
-    <th>Company</th>
-    <th>Contact</th>
-    <th>Country</th>
-  </tr>
-  <tr>
-    <td>Alfreds Futterkiste</td>
-    <td>Maria Anders</td>
-    <td>Germany</td>
-  </tr>
-  <tr>
-    <td>Centro comercial Moctezuma</td>
-    <td>Francisco Chang</td>
-    <td>Mexico</td>
-  </tr>
-</table> 	    	
+		 <table>
+		  <tr>
+		    <th>Vorgang</th>
+		    <th>offen </th>
+		    <th>abgeschlossen</th>
+		  </tr>
+		  <tr>
+		    <td>Anfragen<td>
+		    <td>10</td>
+		    <td>5</td>
+		  </tr>
+		  <tr>
+		    <td>Beschwerden</td>
+		    <td>8</td>
+		    <td>7</td>
+		  </tr>
+		</table> 	    	
       </div>
     </div>
   </div>

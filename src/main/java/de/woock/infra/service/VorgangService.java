@@ -9,6 +9,7 @@ import de.woock.domain.Anfrage;
 import de.woock.domain.Beschwerde;
 import de.woock.domain.Vorgang;
 import de.woock.infra.repository.AnfrageReposity;
+import de.woock.infra.repository.BeschwerdenReposity;
 import de.woock.infra.repository.VorgangRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -16,16 +17,17 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @AllArgsConstructor
 @Service
-public class AnfragenService {
+public class VorgangService {
 	
-	private VorgangRepository vorgangRepository;
-	private AnfrageReposity   anfrageReposity;
+	private VorgangRepository   vorgangRepository;
+	private AnfrageReposity     anfrageReposity;
+	private BeschwerdenReposity beschwerdenReposity;
 
 	public List<Anfrage> alleAnfragen() {
 		return Anfrage.liste();
 	}
 	
-	public List<Vorgang>alleBeschwerden() {
+	public List<Beschwerde>alleBeschwerden() {
 		return Beschwerde.liste();
 	}
 	
@@ -51,8 +53,21 @@ public class AnfragenService {
 		return anfrageReposity.findById(anfrageId).orElse(new Anfrage());
 	}
 
+	public Beschwerde beschwerde(Long beschwerdeId) {
+		return beschwerdenReposity.findById(beschwerdeId).orElse(new Beschwerde());
+	}
+
 	public void heuteGestellt(Anfrage anfrage) {
 		anfrage.stellen(anfrage.getFrage());
+	}
+	
+	public void heuteGestellt(Beschwerde beschwerde) {
+		beschwerde.einreichen(beschwerde.getBeschwerde());
+		
+	}
+
+	public void beschwerdeAktualisiert(Beschwerde konvertiere) {
+		// TODO Auto-generated method stub
 		
 	}
 }
