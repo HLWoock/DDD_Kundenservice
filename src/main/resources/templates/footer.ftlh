@@ -22,7 +22,7 @@
 						</span>
 					</a></li>
 				</ul>
-				<p class="copyright text-muted">Copyright &copy; oose. eG 2020</p>
+				<p class="copyright text-muted">Copyright &copy; oose. eG 2023</p>
 			</div>
 		</div>
 	</div>
