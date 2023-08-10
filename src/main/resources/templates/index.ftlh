@@ -47,7 +47,6 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ms-auto py-4 py-lg-0">
-          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="anfragen/">Anfragen</a></li>
           <li class="nav-item"><a class="nav-link" href="beschwerden/">Beschwerden</a></li>
           <li class="nav-item"><a class="nav-link" href="contact.html">Kontakt</a>
