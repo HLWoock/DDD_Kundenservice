@@ -84,7 +84,7 @@
 		            <th>bearbeitet</th>
 		        </tr>
 		        <tr>
-		            <td>Anfragen<td>
+		            <td>Anfragen</td>
 		            <td>${anfragen}</td>
 		            <td>5</td>
 		        </tr>
