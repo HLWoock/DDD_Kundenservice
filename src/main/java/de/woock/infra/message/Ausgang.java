@@ -17,13 +17,13 @@ public class Ausgang {
 	private final JmsTemplate ausgang;
 
     public void neuerVorgangFuerAbteilung(Anfrage anfrage, Abteilungen abteilung) {
-        log.debug("Anfrage {} weitergeleitet", anfrage.getId());
+        log.debug("Anfrage {} weitergeleitet: {}", anfrage.getId(), anfrage.getFrage());
     	ausgang.send(abteilung.name(), 
                      session -> session.createObjectMessage(anfrage));
     }
     
     public void neuerVorgangFuerAbteilung(Beschwerde beschwerde, Abteilungen abteilung) {
-    	log.debug("Beschwerde {} weitergeleitet", beschwerde.getId());
+    	log.debug("Beschwerde {} weitergeleitet: {}", beschwerde.getId(), beschwerde.getBeschwerde());
     	ausgang.send(abteilung.name(), 
     			session -> session.createObjectMessage(beschwerde));
     }

@@ -7,4 +7,5 @@ import de.woock.domain.Anfrage;
 @Repository
 public interface AnfrageReposity extends BaseRepository<Anfrage> {
 
+	Anfrage findByFrage(String frage);
 }
