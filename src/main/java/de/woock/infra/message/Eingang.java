@@ -11,7 +11,7 @@ import lombok.extern.log4j.Log4j2;
 public class Eingang {
 	@JmsListener(destination = "Antwort", containerFactory = "myFactory", subscription = "stattauto")
 	public void antwortVerarbeiten(Anfrage antwort) {
-		log.debug("Antbort eingegangen");
+		log.debug("Antwort eingegangen");
 		antwort.beantworten(antwort.getAntwort());
 	}	
 }
