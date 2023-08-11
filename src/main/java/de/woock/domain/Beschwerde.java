@@ -1,7 +1,6 @@
 package de.woock.domain;
 
 import static de.woock.domain.Status.AUFGENOMMEN;
-import static de.woock.domain.Prio.HOCH;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -42,7 +41,7 @@ public class Beschwerde extends Vorgang
 	}
 	@Override
 	public Beschwerde weiterleitenAn(Abteilungen abteilung) {
-		Kundenservice.vorgaengeBoard.neuenVorgangAnheften(this, abteilung);
+		Kundenservice.vorgaengeBoard.neueBeschwerdeAnheften(this, abteilung);
 		return this;
 	}
 	

@@ -54,7 +54,7 @@ public class Anfrage extends    Vorgang
 	}
 	
 	public Anfrage weiterleitenAn(Abteilungen abteilung) {
-		Kundenservice.vorgaengeBoard.neuenVorgangAnheften(this, abteilung);
+		Kundenservice.vorgaengeBoard.neueAnfrageAnheften(this, abteilung);
 		return this;
 	}
 
