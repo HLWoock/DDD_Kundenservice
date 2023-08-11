@@ -82,7 +82,7 @@
 							<@spring.formInput "anfrage.version" "placeholder='version' readonly='false'" "text"/> <br />
 						</div><br>
 						<div class="form-group">
-						    <label for="id">Frage</label>
+						    <label for="frage">Frage</label>
 							<@spring.formTextarea "anfrage.frage" "rows='4' cols='60' readonly='true'" /> <br />
 						</div><br>
 						<div class="form-group">
