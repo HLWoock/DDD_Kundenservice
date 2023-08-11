@@ -11,12 +11,21 @@
         
         <script type="text/javascript">
       		$(function(){
-      			$('button').click(function(e) {
+      			$('.bearbeiten').click(function(e) {
       				var activeRow=$(this).closest("tr"); 
          
         			var anfrageId = activeRow.find("td:eq(0)").text();
         			
         			var url = "http://localhost:8081/anfrage/" + anfrageId + "/bearbeiten";
+					console.log(url);
+					window.location.href = url;
+      			});
+      			$('.weiterleiten').click(function(e) {
+      				var activeRow=$(this).closest("tr"); 
+         
+        			var anfrageId = activeRow.find("td:eq(0)").text();
+        			
+        			var url = "http://localhost:8081/anfrage/" + anfrageId + "/weiterleiten";
 					console.log(url);
 					window.location.href = url;
       			});
@@ -93,10 +102,10 @@
 					    <td>${anfrage.frage}</td>
 					    <td>${anfrage.antwort}</td>
 					    <td>${anfrage.prio}</td>
-					    <td><button               type="button" class="edit material-icons"><i class="fas fa-edit"></i></button>
-                            <button               type="button" class="delete material-icons"><i class="far fa-trash-alt"></i></button>
+					    <td><button               type="button" class="bearbeiten material-icons"><i class="fas fa-edit"></i></button>
+                            <button               type="button" class="loescfen material-icons"><i class="far fa-trash-alt"></i></button>
                             <button id="bn_check" type="button" class="check material-icons"><i class="fas fa-check"></i></button>
-                            <button               type="button" class="export material-icons"><i class="fas fa-file-export"></i></button></td>
+                            <button               type="button" class="weiterleiten material-icons"><i class="fas fa-file-export"></i></button></td>
 			        </tr>
 				</#list>
 			</table>

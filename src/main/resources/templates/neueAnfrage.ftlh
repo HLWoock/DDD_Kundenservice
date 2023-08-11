@@ -100,7 +100,7 @@
 								  <@spring.formTextarea "anfrage.antwort" "rows='4' cols='60'" /> <br />
 						  </div><br>
 							
-						  <input type="submit" value="Stellen" />
+						  <input type="submit" value="weiter" />
 					  </form>
 			      </fieldset>
 				  <br>

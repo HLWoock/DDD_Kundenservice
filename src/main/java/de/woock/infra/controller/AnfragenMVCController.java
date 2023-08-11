@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import de.woock.domain.Abteilungen;
 import de.woock.domain.Anfrage;
 import de.woock.domain.Prio;
 import de.woock.domain.Status;
 import de.woock.domain.ausnahmen.LeeresFeldException;
 import de.woock.infra.dto.AnfrageDto;
+import de.woock.infra.dto.WeiterleitenDto;
 import de.woock.infra.service.VorgangService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -55,6 +57,28 @@ public class AnfragenMVCController {
 		} catch (LeeresFeldException e) {
 			e.printStackTrace();
 		} 
+		return "redirect:/anfragen";
+	}
+	
+	@GetMapping("/anfrage/{anfrageId}/weiterleiten")
+	public ModelAndView anfrageWeiterleitenForm(@PathVariable Long anfrageId) {
+		ModelAndView model = new ModelAndView("anfrageWeiterleiten");
+		Anfrage anfrage = anfragenService.anfrage(anfrageId);
+		
+		
+		model.addObject("anfrage", new WeiterleitenDto(anfrageId, anfrage.getFrage(), false));
+		log.debug("Anfrage {}/{} wird gerade zur Weiterleitung in die Anzeige gebracht", anfrage.getId(), anfrage.getVersion());
+		return model;
+	}
+	
+	@PostMapping("/anfrage/{anfrageId}/weiterleiten")
+	public String anfrageWeiterleiten(@ModelAttribute("anfrage") WeiterleitenDto weiterleitenDto) {
+		log.debug("Anfrage {} weiterleiten", weiterleitenDto.getId());
+//		try {
+//			anfragenService.anfrageAktualisiert(konvertiere(weiterleitenDto));
+//		} catch (LeeresFeldException e) {
+//			e.printStackTrace();
+//		} 
 		return "redirect:/";
 	}
 	
@@ -80,7 +104,7 @@ public class AnfragenMVCController {
 		}
 		anfragenService.heuteGestellt(anfrage);
 		log.debug("neue Anfrage: {}", anfrage);
-		return "redirect:/";
+		return "redirect:/anfragen";
 	}
 	
 	private Anfrage konvertiere(AnfrageDto anfrageDto) throws LeeresFeldException {
