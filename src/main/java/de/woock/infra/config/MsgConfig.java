@@ -22,9 +22,9 @@ public class MsgConfig {
 	    DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
 	    factory.setConnectionFactory(connectionFactory);
 //	    factory.setConcurrency("5-10");
-	    factory.setPubSubDomain(true);
+//	    factory.setPubSubDomain(true);
 	    factory.setClientId("Kundenservice");
-	    factory.setSubscriptionDurable(false);
+//	    factory.setSubscriptionDurable(false);
 	    configurer.configure(factory, connectionFactory);
 	    return factory;
 	}
@@ -40,7 +40,7 @@ public class MsgConfig {
 	public JmsTemplate jmsTemplate() {
 	    JmsTemplate template = new JmsTemplate();
 	    template.setConnectionFactory(connectionFactory());
-	    template.setPubSubDomain(true);
+//	    template.setPubSubDomain(true);
 	    return template;
 	}
 

@@ -17,7 +17,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-@SuppressWarnings({ "serial" })
 @NoArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -25,6 +24,7 @@ import lombok.NoArgsConstructor;
 public class Anfrage extends    Vorgang 
                      implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private String frage;
 	private String antwort;
 	private String von;
