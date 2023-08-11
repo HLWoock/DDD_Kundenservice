@@ -40,7 +40,7 @@ public class MsgConfig {
 	public JmsTemplate jmsTemplate() {
 	    JmsTemplate template = new JmsTemplate();
 	    template.setConnectionFactory(connectionFactory());
-	    template.setPubSubDomain(false);
+	    template.setPubSubDomain(true);
 	    return template;
 	}
 
