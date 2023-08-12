@@ -82,15 +82,15 @@
 						<h2>weiterleiten an:</h2>
 						<div class="form-group">
 						    <label for="fuhrpark">Fuhrpark</label>
-							<@spring.formCheckbox "anfrage.fuhrpark" "value='Fuhrpark'"/> <br />
+							<@spring.formCheckbox "anfrage.fuhrpark" ""/> <br />
 						</div>
 						<div class="form-group">
 						    <label for="verein">Verein</label>
-							<@spring.formCheckbox "anfrage.fuhrpark" "value='Verein'"/> <br />
+							<@spring.formCheckbox "anfrage.verein" ""/> <br />
 						</div>
 						<div class="form-group">
-						    <label for="abeichnung">Abrechnung</label>
-							<@spring.formCheckbox "anfrage.fuhrpark" "value='Abrechnung'"/> <br />
+						    <label for="abrechnung">Abrechnung</label>
+							<@spring.formCheckbox "anfrage.abrechnung" ""/> <br />
 						</div><br/>
 						
 						<input type="submit" value="Weiterleiten" />

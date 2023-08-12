@@ -1,6 +1,7 @@
 package de.woock.domain;
 
-public enum Abteilungen {
+public enum Abteilung {
 	Fuhrpark,
+	Abrechnung,
 	Verein;
 }

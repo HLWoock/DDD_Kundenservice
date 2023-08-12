@@ -3,8 +3,7 @@ package de.woock.infra.message;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 
-import de.woock.domain.Abteilungen;
-import de.woock.domain.Anfrage;
+import de.woock.domain.Abteilung;
 import de.woock.domain.Beschwerde;
 import de.woock.domain.ereignisse.AnfrageGestellt;
 import lombok.RequiredArgsConstructor;
@@ -17,13 +16,13 @@ public class Ausgang {
 
 	private final JmsTemplate ausgang;
 
-    public void neuerVorgangFuerAbteilung(Anfrage anfrage, Abteilungen abteilung) {
+    public void neuerVorgangFuerAbteilung(AnfrageGestellt anfrage, Abteilung abteilung) {
         log.debug("Anfrage {} weitergeleitet: {}", anfrage.getId(), anfrage.getFrage());
     	ausgang.send(abteilung.name(), 
                      session -> session.createObjectMessage(new AnfrageGestellt(anfrage.getId(), anfrage.getFrage())));
     }
     
-    public void neuerVorgangFuerAbteilung(Beschwerde beschwerde, Abteilungen abteilung) {
+    public void neuerVorgangFuerAbteilung(Beschwerde beschwerde, Abteilung abteilung) {
     	log.debug("Beschwerde {} weitergeleitet: {}", beschwerde.getId(), beschwerde.getBeschwerde());
     	ausgang.send(abteilung.name(), 
     			session -> session.createObjectMessage(beschwerde));

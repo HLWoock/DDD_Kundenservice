@@ -40,7 +40,7 @@ public class Beschwerde extends Vorgang
 		this.beschwerde = beschwerde;
 	}
 	@Override
-	public Beschwerde weiterleitenAn(Abteilungen abteilung) {
+	public Beschwerde weiterleitenAn(Abteilung abteilung) {
 		Kundenservice.vorgaengeBoard.neueBeschwerdeAnheften(this, abteilung);
 		return this;
 	}

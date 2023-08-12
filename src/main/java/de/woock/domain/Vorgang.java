@@ -20,6 +20,6 @@ import lombok.NoArgsConstructor;
 public abstract class Vorgang extends    Kopfdaten 
                               implements Serializable { 
 	
-	public abstract Vorgang weiterleitenAn(Abteilungen abteilung);
+	public abstract Vorgang weiterleitenAn(Abteilung abteilung);
 	public abstract void beantworten(String antwort);
 }

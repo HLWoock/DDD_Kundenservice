@@ -10,5 +10,8 @@ public class WeiterleitenDto {
 	private Long id;
 	
 	private String frage;
+	
 	private Boolean fuhrpark;
+	private Boolean abrechnung;
+	private Boolean verein;
 }

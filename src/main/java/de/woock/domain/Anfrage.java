@@ -53,7 +53,7 @@ public class Anfrage extends    Vorgang
 		return Kundenservice.vorgaengeOrdner.abheften(this);	
 	}
 	
-	public Anfrage weiterleitenAn(Abteilungen abteilung) {
+	public Anfrage weiterleitenAn(Abteilung abteilung) {
 		Kundenservice.vorgaengeBoard.neueAnfrageAnheften(this, abteilung);
 		return this;
 	}

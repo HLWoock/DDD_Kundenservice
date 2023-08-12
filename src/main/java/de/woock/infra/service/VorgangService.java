@@ -5,9 +5,12 @@ import java.util.List;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
+import de.woock.domain.Abteilung;
 import de.woock.domain.Anfrage;
 import de.woock.domain.Beschwerde;
+import de.woock.domain.VorgaengeBoard;
 import de.woock.domain.Vorgang;
+import de.woock.domain.ereignisse.AnfrageGestellt;
 import de.woock.infra.repository.AnfrageReposity;
 import de.woock.infra.repository.BeschwerdenReposity;
 import de.woock.infra.repository.VorgangRepository;
@@ -22,6 +25,8 @@ public class VorgangService {
 	private VorgangRepository   vorgangRepository;
 	private AnfrageReposity     anfrageReposity;
 	private BeschwerdenReposity beschwerdenReposity;
+	
+	private VorgaengeBoard      vorgaengeBoard;
 
 	public List<Anfrage> alleAnfragen() {
 		return Anfrage.liste();
@@ -69,5 +74,9 @@ public class VorgangService {
 	public void beschwerdeAktualisiert(Beschwerde konvertiere) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public void anfrageWeiterleiten(AnfrageGestellt anfrage, Abteilung abteilung){
+		vorgaengeBoard.neueAnfrageAnheften(anfrage, abteilung);
 	}
 }
