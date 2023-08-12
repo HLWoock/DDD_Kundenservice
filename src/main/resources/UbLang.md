@@ -7,5 +7,5 @@ Habe **Antwort** an **Anrufer** geschickt.
 Der **Status** der **Anfrage** ist: **aufgenommen**, **in Beabeitung**, **erledigt**.  
 Die **Prioritoat** der **Anfrage** ist **hoch**.  
 Wieviele **Vorgänge** sind noch **unbearbeitet**?  
-Gerade ist eine **Beschwerde** **eingegangen**. 
+Gerade ist eine **Beschwerde** **eingegangen**.  
 Habe Anfrage in **Anfragenordner** **abgeheftet.**    
