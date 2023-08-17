@@ -9,7 +9,7 @@ import de.woock.domain.Anfrage;
 import de.woock.domain.Beschwerde;
 import de.woock.domain.Vorgang;
 import de.woock.infra.repository.AnfrageReposity;
-import de.woock.infra.repository.BeschwerdenReposity;
+import de.woock.infra.repository.BeschwerdeReposity;
 import de.woock.infra.repository.VorgangRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -19,12 +19,12 @@ import lombok.extern.log4j.Log4j2;
 @Service
 public class VorgangService {
 	
-	private VorgangRepository   vorgangRepository;
-	private AnfrageReposity     anfrageReposity;
-	private BeschwerdenReposity beschwerdenReposity;
+	private VorgangRepository  vorgangRepository;
+	private AnfrageReposity    anfrageReposity;
+	private BeschwerdeReposity beschwerdeReposity;
 
 	public List<Anfrage> alleAnfragen() {
-		return Anfrage.liste();
+		return anfrageReposity.findAll();
 	}
 	
 	public List<Beschwerde>alleBeschwerden() {
@@ -54,7 +54,7 @@ public class VorgangService {
 	}
 
 	public Beschwerde beschwerde(Long beschwerdeId) {
-		return beschwerdenReposity.findById(beschwerdeId).orElse(new Beschwerde());
+		return beschwerdeReposity.findById(beschwerdeId).orElse(new Beschwerde());
 	}
 
 	public void heuteGestellt(Anfrage anfrage) {

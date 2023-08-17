@@ -11,11 +11,11 @@ public class VorgaengeBoard {
 	
 	private Ausgang ausgang;
 
-	public void neueAnfrageAnheften(Anfrage anfrage, Abteilungen abteilung) {
+	public void neueAnfrageAnheften(Anfrage anfrage, Abteilung abteilung) {
 		ausgang.neuerVorgangFuerAbteilung(anfrage, abteilung);
 	}
 	
-	public void neueBeschwerdeAnheften(Beschwerde beschwerde, Abteilungen abteilung) {
+	public void neueBeschwerdeAnheften(Beschwerde beschwerde, Abteilung abteilung) {
 		ausgang.neuerVorgangFuerAbteilung(beschwerde, abteilung);
 	}
 

@@ -22,7 +22,7 @@ public class AnfrageTest {
 		
 		// wenn
 		new Anfrage().stellen(frage)
-                     .weiterleitenAn(Abteilungen.Fuhrpark)
+                     .weiterleitenAn(Abteilung.Fuhrpark)
                      .beantworten(antwort);
 		
 		// dann

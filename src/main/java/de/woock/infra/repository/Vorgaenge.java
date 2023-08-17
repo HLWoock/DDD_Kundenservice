@@ -12,9 +12,9 @@ import lombok.RequiredArgsConstructor;
 @Component
 public class Vorgaenge {
 	
-	private final VorgangRepository   vorgangRepository;
-	private final AnfrageReposity     anfrageReposity;
-	private final BeschwerdenReposity beschwerdenReposity;
+	private final VorgangRepository  vorgangRepository;
+	private final AnfrageReposity    anfrageReposity;
+	private final BeschwerdeReposity beschwerdeReposity;
 
 	public Vorgang hinzufuegen(Vorgang vorgang) {
 		return vorgangRepository.save(vorgang);
@@ -29,7 +29,7 @@ public class Vorgaenge {
 	}
 	
 	public List<Beschwerde> alleBeschwerden() {
-		return beschwerdenReposity.findAll();
+		return beschwerdeReposity.findAll();
 	}
 	
 }

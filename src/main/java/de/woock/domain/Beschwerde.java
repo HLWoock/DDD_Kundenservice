@@ -11,7 +11,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 import de.woock.Kundenservice;
-import de.woock.domain.ausnahmen.LeeresFeldException;
+import de.woock.domain.fehler.LeeresFeldFehler;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -32,15 +32,15 @@ public class Beschwerde extends Vorgang
     @Enumerated(EnumType.STRING) 
     private Status status;
 
-	public Beschwerde(String beschwerde) throws LeeresFeldException {
+	public Beschwerde(String beschwerde) throws LeeresFeldFehler {
 		if (beschwerde == null || beschwerde.isBlank()) {
-			throw new LeeresFeldException("frage");
+			throw new LeeresFeldFehler("frage");
 		}
 
 		this.beschwerde = beschwerde;
 	}
 	@Override
-	public Beschwerde weiterleitenAn(Abteilungen abteilung) {
+	public Beschwerde weiterleitenAn(Abteilung abteilung) {
 		Kundenservice.vorgaengeBoard.neueBeschwerdeAnheften(this, abteilung);
 		return this;
 	}

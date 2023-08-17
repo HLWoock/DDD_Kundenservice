@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import de.woock.domain.Beschwerde;
 import de.woock.domain.Prio;
 import de.woock.domain.Status;
-import de.woock.domain.ausnahmen.LeeresFeldException;
+import de.woock.domain.fehler.LeeresFeldFehler;
 import de.woock.infra.dto.BeschwerdeDto;
 import de.woock.infra.service.VorgangService;
 import lombok.AllArgsConstructor;
@@ -52,7 +52,7 @@ public class BeschwerdenMVCController {
 		log.debug("Beschwerde {}/{} fertig bearbeitet", beschwerdeDto.getId(), beschwerdeDto.getVersion());
 		try {
 			vorgangService.beschwerdeAktualisiert(konvertiere(beschwerdeDto));
-		} catch (LeeresFeldException e) {
+		} catch (LeeresFeldFehler e) {
 			e.printStackTrace();
 		} 
 		return "redirect:/";
@@ -71,7 +71,7 @@ public class BeschwerdenMVCController {
 		Beschwerde beschwerde = null;
 		try {
 			beschwerde = konvertiere(beschwerdeDto);
-		} catch (LeeresFeldException e) {
+		} catch (LeeresFeldFehler e) {
 			ValidationUtils.rejectIfEmptyOrWhitespace(result, e.feld(), "feld.nicht.leer");
 		}
 		if (result.hasErrors()) {
@@ -83,7 +83,7 @@ public class BeschwerdenMVCController {
 		return "redirect:/";
 	}
 	
-	private Beschwerde konvertiere(BeschwerdeDto beschwerdeDto) throws LeeresFeldException {
+	private Beschwerde konvertiere(BeschwerdeDto beschwerdeDto) throws LeeresFeldFehler {
 		Beschwerde beschwerde = new Beschwerde(beschwerdeDto.getBeschwerde());
 		beschwerde.setAntwort(beschwerdeDto.getAntwort());
 		beschwerde.setId     (beschwerdeDto.getId());
