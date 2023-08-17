@@ -8,9 +8,7 @@ import org.springframework.stereotype.Service;
 import de.woock.domain.Anfrage;
 import de.woock.domain.Beschwerde;
 import de.woock.domain.Vorgang;
-import de.woock.infra.repository.AnfrageReposity;
-import de.woock.infra.repository.BeschwerdeReposity;
-import de.woock.infra.repository.VorgangRepository;
+import de.woock.infra.repository.Vorgaenge;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -19,24 +17,18 @@ import lombok.extern.log4j.Log4j2;
 @Service
 public class VorgangService {
 	
-	private VorgangRepository  vorgangRepository;
-	private AnfrageReposity    anfrageReposity;
-	private BeschwerdeReposity beschwerdeReposity;
+	private Vorgaenge          vorgaenge;
 
 	public List<Anfrage> alleAnfragen() {
-		return anfrageReposity.findAll();
+		return vorgaenge.alleAnfragen();
 	}
 	
 	public List<Beschwerde>alleBeschwerden() {
-		return Beschwerde.liste();
+		return vorgaenge.alleBeschwerden();
 	}
 	
 	public List<Vorgang> alleVorgaenge() {
-		List<Vorgang> vorgaenge = vorgangRepository.findAll();
-		
-		vorgaenge.addAll(vorgaenge);
-		
-		return vorgaenge;
+		return  vorgaenge.alleVorgaenge();
 	}
 	
 	public void anfrageAktualisiert(Anfrage anfrage) {
@@ -50,11 +42,11 @@ public class VorgangService {
 	}
 
 	public Anfrage anfrage(Long anfrageId) {
-		return anfrageReposity.findById(anfrageId).orElse(new Anfrage());
+		return vorgaenge.anfrage(anfrageId);
 	}
 
 	public Beschwerde beschwerde(Long beschwerdeId) {
-		return beschwerdeReposity.findById(beschwerdeId).orElse(new Beschwerde());
+		return vorgaenge.beschwerde(beschwerdeId);
 	}
 
 	public void heuteGestellt(Anfrage anfrage) {

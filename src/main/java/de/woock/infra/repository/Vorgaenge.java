@@ -32,4 +32,12 @@ public class Vorgaenge {
 		return beschwerdeReposity.findAll();
 	}
 	
+	public Anfrage anfrage(Long anfrageId) {
+		return anfrageReposity.findById(anfrageId).orElse(new Anfrage());
+	}
+
+	public Beschwerde beschwerde(Long beschwerdeId) {
+		return beschwerdeReposity.findById(beschwerdeId).orElse(new Beschwerde());
+	}
+	
 }

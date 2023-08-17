@@ -4,7 +4,6 @@ import static de.woock.domain.Status.AUFGENOMMEN;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -58,9 +57,4 @@ public class Beschwerde extends Vorgang
 		this.antwort = antwort;
 		Kundenservice.vorgaengeOrdner.updaten(this);
 	}
-	
-	public static List<Beschwerde> liste() {
-		return Kundenservice.vorgaengeOrdner.alleBeschweden();
-	}
-
 }
