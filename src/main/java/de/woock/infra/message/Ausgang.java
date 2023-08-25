@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import de.woock.domain.Abteilung;
 import de.woock.domain.Anfrage;
 import de.woock.domain.Beschwerde;
-import de.woock.domain.ereignisse.AnfrageGestellt;
+import de.woock.domain.Konvertierer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -15,12 +15,13 @@ import lombok.extern.log4j.Log4j2;
 @Component
 public class Ausgang {
 
-	private final JmsTemplate ausgang;
+	private final JmsTemplate  ausgang;
+	private final Konvertierer konvertierer;
 
     public void neuerVorgangFuerAbteilung(Anfrage anfrage, Abteilung abteilung) {
         log.debug("Anfrage {} weitergeleitet: {}", anfrage.getId(), anfrage.getFrage());
     	ausgang.send(abteilung.name(), 
-                     session -> session.createObjectMessage(new AnfrageGestellt(anfrage.getId(), anfrage.getFrage())));
+                     session -> session.createObjectMessage(konvertierer.konvertiere(anfrage)));
     }
     
     public void neuerVorgangFuerAbteilung(Beschwerde beschwerde, Abteilung abteilung) {

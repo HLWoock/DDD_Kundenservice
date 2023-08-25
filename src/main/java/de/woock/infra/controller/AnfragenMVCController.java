@@ -74,8 +74,9 @@ public class AnfragenMVCController {
 	@PostMapping("/anfrage/{anfrageId}/weiterleiten")
 	public String anfrageWeiterleiten(@ModelAttribute("anfrage") WeiterleitenDto weiterleitenDto) {
 		log.debug("Anfrage {} weiterleiten", weiterleitenDto.getId());
+		vorgangService.anfrageWeiterleiten(weiterleitenDto.getId(), konvertierer.konvertiere(weiterleitenDto));
  
-		return "redirect:/";
+		return "redirect:/anfragen";
 	}
 	
 	@GetMapping("/neueAnfrage")

@@ -1,5 +1,10 @@
 package de.woock.domain;
 
+
+import static de.woock.domain.Abteilung.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import de.woock.domain.ereignisse.AnfrageGestellt;
@@ -20,11 +25,6 @@ public class Konvertierer {
 		return anfrage;
 	}
 	
-	public AnfrageGestellt konvertiere(WeiterleitenDto weiterleitenDto) {
-		AnfrageGestellt anfrage = new AnfrageGestellt(weiterleitenDto.getId(), weiterleitenDto.getFrage());
-		return anfrage;
-	}
-	
 	public AnfrageGestellt konvertiere(Anfrage anfrage) {
 		AnfrageGestellt anfrageGestellt = new AnfrageGestellt(anfrage.getId(), anfrage.getFrage());
 		return anfrageGestellt;
@@ -37,5 +37,13 @@ public class Konvertierer {
 		beschwerde.setVersion(beschwerdeDto.getVersion());
 		beschwerde.setPrio   (beschwerdeDto.getPrio());
 		return beschwerde;
+	}
+	
+	public List<Abteilung> konvertiere(WeiterleitenDto weiterleitenDto) {
+		List<Abteilung> abteilungen = new ArrayList<>();
+		if (weiterleitenDto.getAbrechnung() == true) abteilungen.add(Abrechnung);
+		if (weiterleitenDto.getFuhrpark()   == true) abteilungen.add(Fuhrpark);
+		if (weiterleitenDto.getVerein()     == true) abteilungen.add(Verein);
+		return abteilungen;
 	}
 }
