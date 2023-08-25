@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import de.woock.domain.Beschwerde;
 
 @Repository
-public interface BeschwerdenReposity extends BaseRepository<Beschwerde> {
+public interface BeschwerdeReposity extends BaseRepository<Beschwerde> {
 
 }

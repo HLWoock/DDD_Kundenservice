@@ -5,14 +5,13 @@ import static de.woock.domain.Status.AUFGENOMMEN;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 import de.woock.Kundenservice;
-import de.woock.domain.ausnahmen.LeeresFeldException;
+import de.woock.domain.fehler.LeeresFeldFehler;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -33,9 +32,9 @@ public class Anfrage extends    Vorgang
 	@Enumerated(EnumType.STRING) 
 	private Status status;
 	
-	public Anfrage(String frage) throws LeeresFeldException {
+	public Anfrage(String frage) throws LeeresFeldFehler {
 		if (frage == null || frage.isBlank()) {
-			throw new LeeresFeldException("frage");
+			throw new LeeresFeldFehler("frage");
 		}
 
 		this.frage = frage;
@@ -61,9 +60,5 @@ public class Anfrage extends    Vorgang
 	public void beantworten(String antwort) {
 		this.antwort = antwort;
 		Kundenservice.vorgaengeOrdner.updaten(this);
-	}
-	
-	public static List<Anfrage> liste() {
-		return Kundenservice.vorgaengeOrdner.alleAbfragen();
 	}
 }

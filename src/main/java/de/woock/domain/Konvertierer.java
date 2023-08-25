@@ -2,15 +2,15 @@ package de.woock.domain;
 
 import org.springframework.stereotype.Service;
 
-import de.woock.domain.ausnahmen.LeeresFeldException;
 import de.woock.domain.ereignisse.AnfrageGestellt;
+import de.woock.domain.fehler.LeeresFeldFehler;
 import de.woock.infra.dto.AnfrageDto;
 import de.woock.infra.dto.WeiterleitenDto;
 
 @Service
 public class Konvertierer {
 
-	public Anfrage konvertiere(AnfrageDto anfrageDto) throws LeeresFeldException {
+	public Anfrage konvertiere(AnfrageDto anfrageDto) throws LeeresFeldFehler {
 		Anfrage anfrage = new Anfrage(anfrageDto.getFrage());
 		anfrage.setAntwort(anfrageDto.getAntwort());
 		anfrage.setId     (anfrageDto.getId());

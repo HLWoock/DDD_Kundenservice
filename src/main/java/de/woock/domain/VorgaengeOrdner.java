@@ -25,7 +25,7 @@ public class VorgaengeOrdner {
 		return vorgaenge.alleVorgaenge();
 	}
 
-	public List<Anfrage> alleAbfragen() {
+	public List<Anfrage> alleAnfragen() {
 		return vorgaenge.alleAnfragen();
 	}
 	

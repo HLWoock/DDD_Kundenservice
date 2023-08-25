@@ -1,9 +1,5 @@
 package de.woock.infra.controller;
 
-import static de.woock.domain.Abteilung.Abrechnung;
-import static de.woock.domain.Abteilung.Fuhrpark;
-import static de.woock.domain.Abteilung.Verein;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,10 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import de.woock.domain.Anfrage;
-import de.woock.domain.Konvertierer;
 import de.woock.domain.Prio;
 import de.woock.domain.Status;
-import de.woock.domain.ausnahmen.LeeresFeldException;
+import de.woock.domain.fehler.LeeresFeldFehler;
 import de.woock.infra.dto.AnfrageDto;
 import de.woock.infra.dto.WeiterleitenDto;
 import de.woock.infra.service.VorgangService;
@@ -33,7 +28,6 @@ import lombok.extern.log4j.Log4j2;
 public class AnfragenMVCController {
 	
 	private VorgangService vorgangService;
-	private Konvertierer   konvertierer;
 
 		@GetMapping({"/anfragen"})
     public ModelAndView anfragen() {
@@ -58,8 +52,8 @@ public class AnfragenMVCController {
 	public String anfrageBearbeiten(@ModelAttribute("anfrage") AnfrageDto anfrageDto) {
 		log.debug("Anfrage {}/{} fertig bearbeitet", anfrageDto.getId(), anfrageDto.getVersion());
 		try {
-			vorgangService.anfrageAktualisiert(konvertierer.konvertiere(anfrageDto));
-		} catch (LeeresFeldException e) {
+			vorgangService.anfrageAktualisiert(konvertiere(anfrageDto));
+		} catch (LeeresFeldFehler e) {
 			e.printStackTrace();
 		} 
 		return "redirect:/anfragen";
@@ -78,10 +72,7 @@ public class AnfragenMVCController {
 	@PostMapping("/anfrage/{anfrageId}/weiterleiten")
 	public String anfrageWeiterleiten(@ModelAttribute("anfrage") WeiterleitenDto weiterleitenDto) {
 		log.debug("Anfrage {} weiterleiten", weiterleitenDto.getId());
-		if (weiterleitenDto.getFuhrpark())   vorgangService.anfrageWeiterleiten(konvertierer.konvertiere(weiterleitenDto), Fuhrpark);
-		if (weiterleitenDto.getVerein())     vorgangService.anfrageWeiterleiten(konvertierer.konvertiere(weiterleitenDto), Verein);
-		if (weiterleitenDto.getAbrechnung()) vorgangService.anfrageWeiterleiten(konvertierer.konvertiere(weiterleitenDto), Abrechnung);
-		 
+ 
 		return "redirect:/";
 	}
 	
@@ -97,8 +88,8 @@ public class AnfragenMVCController {
 		log.debug("neue Anfrage: '{}' mit Prio {} wird gestellt", anfrageDto.getFrage(), anfrageDto.getPrio());
 		Anfrage anfrage = null;
 		try {
-			anfrage = konvertierer.konvertiere(anfrageDto);
-		} catch (LeeresFeldException e) {
+			anfrage = konvertiere(anfrageDto);
+		} catch (LeeresFeldFehler e) {
 			ValidationUtils.rejectIfEmptyOrWhitespace(result, e.feld(), "feld.nicht.leer");
 		}
 		if (result.hasErrors()) {
@@ -110,5 +101,12 @@ public class AnfragenMVCController {
 		return "redirect:/anfragen";
 	}
 	
-
+	private Anfrage konvertiere(AnfrageDto anfrageDto) throws LeeresFeldFehler {
+		Anfrage anfrage = new Anfrage(anfrageDto.getFrage());
+		anfrage.setAntwort(anfrageDto.getAntwort());
+		anfrage.setId     (anfrageDto.getId());
+		anfrage.setVersion(anfrageDto.getVersion());
+		anfrage.setPrio   (anfrageDto.getPrio());
+		return anfrage;
+	}
 }
