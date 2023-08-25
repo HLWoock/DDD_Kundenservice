@@ -84,6 +84,4 @@ public class BeschwerdenMVCController {
 		log.debug("neue Beschwerde: {}", beschwerde);
 		return "redirect:/";
 	}
-	
-	
 }
