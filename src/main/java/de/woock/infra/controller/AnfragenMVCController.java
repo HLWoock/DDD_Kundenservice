@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import de.woock.domain.Anfrage;
+import de.woock.domain.Konvertierer;
 import de.woock.domain.Prio;
 import de.woock.domain.Status;
 import de.woock.domain.fehler.LeeresFeldFehler;
@@ -28,8 +29,9 @@ import lombok.extern.log4j.Log4j2;
 public class AnfragenMVCController {
 	
 	private VorgangService vorgangService;
+	private Konvertierer   konvertierer;
 
-		@GetMapping({"/anfragen"})
+	@GetMapping({"/anfragen"})
     public ModelAndView anfragen() {
     	ModelAndView model = new ModelAndView("anfragen");
     	model.addObject("anfragen", vorgangService.alleAnfragen());
@@ -41,7 +43,7 @@ public class AnfragenMVCController {
 		ModelAndView model   = new ModelAndView("anfrageBearbeiten");
 		Anfrage      anfrage = vorgangService.anfrage(anfrageId);
 		
-		model.addObject("prios", Prio.values());
+		model.addObject("prios"  , Prio.values());
 		model.addObject("statuus", Status.values()); 
 		model.addObject("anfrage", anfrage);
 		log.debug("Anfrage {}/{} wird gerade zur Bearbeitung in die Anzeige gebracht", anfrage.getId(), anfrage.getVersion());
@@ -52,7 +54,7 @@ public class AnfragenMVCController {
 	public String anfrageBearbeiten(@ModelAttribute("anfrage") AnfrageDto anfrageDto) {
 		log.debug("Anfrage {}/{} fertig bearbeitet", anfrageDto.getId(), anfrageDto.getVersion());
 		try {
-			vorgangService.anfrageAktualisiert(konvertiere(anfrageDto));
+			vorgangService.anfrageAktualisiert(konvertierer.konvertiere(anfrageDto));
 		} catch (LeeresFeldFehler e) {
 			e.printStackTrace();
 		} 
@@ -88,7 +90,7 @@ public class AnfragenMVCController {
 		log.debug("neue Anfrage: '{}' mit Prio {} wird gestellt", anfrageDto.getFrage(), anfrageDto.getPrio());
 		Anfrage anfrage = null;
 		try {
-			anfrage = konvertiere(anfrageDto);
+			anfrage = konvertierer.konvertiere(anfrageDto);
 		} catch (LeeresFeldFehler e) {
 			ValidationUtils.rejectIfEmptyOrWhitespace(result, e.feld(), "feld.nicht.leer");
 		}
@@ -99,14 +101,5 @@ public class AnfragenMVCController {
 		vorgangService.heuteGestellt(anfrage);
 		log.debug("neue Anfrage: {}", anfrage);
 		return "redirect:/anfragen";
-	}
-	
-	private Anfrage konvertiere(AnfrageDto anfrageDto) throws LeeresFeldFehler {
-		Anfrage anfrage = new Anfrage(anfrageDto.getFrage());
-		anfrage.setAntwort(anfrageDto.getAntwort());
-		anfrage.setId     (anfrageDto.getId());
-		anfrage.setVersion(anfrageDto.getVersion());
-		anfrage.setPrio   (anfrageDto.getPrio());
-		return anfrage;
 	}
 }

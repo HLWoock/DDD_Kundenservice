@@ -26,6 +26,6 @@ public class Ausgang {
     public void neuerVorgangFuerAbteilung(Beschwerde beschwerde, Abteilung abteilung) {
     	log.debug("Beschwerde {} weitergeleitet: {}", beschwerde.getId(), beschwerde.getBeschwerde());
     	ausgang.send(abteilung.name(), 
-    			session -> session.createObjectMessage(beschwerde));
+    			     session -> session.createObjectMessage(beschwerde));
     }
 }

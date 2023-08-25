@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import de.woock.domain.ereignisse.AnfrageGestellt;
 import de.woock.domain.fehler.LeeresFeldFehler;
 import de.woock.infra.dto.AnfrageDto;
+import de.woock.infra.dto.BeschwerdeDto;
 import de.woock.infra.dto.WeiterleitenDto;
 
 @Service
@@ -27,5 +28,14 @@ public class Konvertierer {
 	public AnfrageGestellt konvertiere(Anfrage anfrage) {
 		AnfrageGestellt anfrageGestellt = new AnfrageGestellt(anfrage.getId(), anfrage.getFrage());
 		return anfrageGestellt;
+	}
+	
+	public Beschwerde konvertiere(BeschwerdeDto beschwerdeDto) throws LeeresFeldFehler {
+		Beschwerde beschwerde = new Beschwerde(beschwerdeDto.getBeschwerde());
+		beschwerde.setAntwort(beschwerdeDto.getAntwort());
+		beschwerde.setId     (beschwerdeDto.getId());
+		beschwerde.setVersion(beschwerdeDto.getVersion());
+		beschwerde.setPrio   (beschwerdeDto.getPrio());
+		return beschwerde;
 	}
 }

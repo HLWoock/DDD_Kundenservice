@@ -36,7 +36,6 @@ public class Anfrage extends    Vorgang
 		if (frage == null || frage.isBlank()) {
 			throw new LeeresFeldFehler("frage");
 		}
-
 		this.frage = frage;
 	}
 

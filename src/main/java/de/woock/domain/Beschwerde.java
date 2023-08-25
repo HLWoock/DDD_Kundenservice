@@ -15,7 +15,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-@SuppressWarnings({ "serial" })
+@SuppressWarnings({"serial"})
 @NoArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = false)

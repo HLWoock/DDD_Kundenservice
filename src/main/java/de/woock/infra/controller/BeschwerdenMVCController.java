@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import de.woock.domain.Beschwerde;
+import de.woock.domain.Konvertierer;
 import de.woock.domain.Prio;
 import de.woock.domain.Status;
 import de.woock.domain.fehler.LeeresFeldFehler;
@@ -27,6 +28,7 @@ import lombok.extern.log4j.Log4j2;
 public class BeschwerdenMVCController {
 	
 	private VorgangService vorgangService;
+	private Konvertierer   konvertierer;
 
 		@GetMapping({"/beschwerden"})
     public ModelAndView beschwerden() {
@@ -51,7 +53,7 @@ public class BeschwerdenMVCController {
 	public String beschwerdeBearbeiten(@ModelAttribute("beschwerde") BeschwerdeDto beschwerdeDto) {
 		log.debug("Beschwerde {}/{} fertig bearbeitet", beschwerdeDto.getId(), beschwerdeDto.getVersion());
 		try {
-			vorgangService.beschwerdeAktualisiert(konvertiere(beschwerdeDto));
+			vorgangService.beschwerdeAktualisiert(konvertierer.konvertiere(beschwerdeDto));
 		} catch (LeeresFeldFehler e) {
 			e.printStackTrace();
 		} 
@@ -70,7 +72,7 @@ public class BeschwerdenMVCController {
 		log.debug("neue Beschwerde: '{}' mit Prio {} wird gestellt", beschwerdeDto.getBeschwerde(), beschwerdeDto.getPrio());
 		Beschwerde beschwerde = null;
 		try {
-			beschwerde = konvertiere(beschwerdeDto);
+			beschwerde = konvertierer.konvertiere(beschwerdeDto);
 		} catch (LeeresFeldFehler e) {
 			ValidationUtils.rejectIfEmptyOrWhitespace(result, e.feld(), "feld.nicht.leer");
 		}
@@ -83,12 +85,5 @@ public class BeschwerdenMVCController {
 		return "redirect:/";
 	}
 	
-	private Beschwerde konvertiere(BeschwerdeDto beschwerdeDto) throws LeeresFeldFehler {
-		Beschwerde beschwerde = new Beschwerde(beschwerdeDto.getBeschwerde());
-		beschwerde.setAntwort(beschwerdeDto.getAntwort());
-		beschwerde.setId     (beschwerdeDto.getId());
-		beschwerde.setVersion(beschwerdeDto.getVersion());
-		beschwerde.setPrio   (beschwerdeDto.getPrio());
-		return beschwerde;
-	}
+	
 }
