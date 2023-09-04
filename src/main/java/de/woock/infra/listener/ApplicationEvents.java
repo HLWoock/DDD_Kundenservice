@@ -9,7 +9,8 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @Component
 public class ApplicationEvents {
-	@EventListener
+	
+	@EventListener()
 	public void listener(ApplicationEvent event) {
 		String source = event.getSource().getClass().getSimpleName();
 		String type   = event.getClass().getSimpleName();
