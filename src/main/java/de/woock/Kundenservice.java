@@ -25,5 +25,4 @@ public class Kundenservice {
 			Kundenservice.vorgaengeBoard  = vorgaengeBoard;
 		};
 	}
-
 }
