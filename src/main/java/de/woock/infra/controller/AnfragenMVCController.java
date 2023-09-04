@@ -18,6 +18,7 @@ import de.woock.domain.Status;
 import de.woock.domain.fehler.LeeresFeldFehler;
 import de.woock.infra.dto.AnfrageDto;
 import de.woock.infra.dto.WeiterleitenDto;
+import de.woock.infra.metrics.MetricsService;
 import de.woock.infra.service.VorgangService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -30,6 +31,7 @@ public class AnfragenMVCController {
 	
 	private VorgangService vorgangService;
 	private Konvertierer   konvertierer;
+	private MetricsService metricsService;
 
 	@GetMapping({"/anfragen"})
     public ModelAndView anfragen() {
@@ -55,6 +57,7 @@ public class AnfragenMVCController {
 		log.debug("Anfrage {}/{} fertig bearbeitet", anfrageDto.getId(), anfrageDto.getVersion());
 		try {
 			vorgangService.anfrageAktualisiert(konvertierer.konvertiere(anfrageDto));
+			metricsService.increment("stattauto.anfragen");
 		} catch (LeeresFeldFehler e) {
 			e.printStackTrace();
 		} 
