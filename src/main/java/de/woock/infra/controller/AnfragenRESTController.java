@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import de.woock.domain.Anfrage;
 import de.woock.domain.Beschwerde;
 import de.woock.domain.Vorgang;
+import de.woock.infra.annotation.Log;
 import de.woock.infra.service.VorgangService;
 import lombok.AllArgsConstructor;
 
@@ -19,6 +20,7 @@ public class AnfragenRESTController {
 	
 	private VorgangService vorgangService;
 	
+	@Log
 	@GetMapping("/anfragen")
 	public List<Anfrage> alleAnfragen() {
 		return vorgangService.alleAnfragen();
