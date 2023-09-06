@@ -23,6 +23,13 @@ spring:
     show-sql: false
   main:
     allow-bean-definition-overriding: true
+  activemq:
+    broker-url: tcp://localhost:61616
+    user: admin
+    password: admin
+    non-blocking-redelivery: true
+    packages:
+       trust-all: true  
 
 
   

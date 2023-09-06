@@ -41,6 +41,8 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.apache.activemq.tooling:activemq-junit:5.16.1'
+	
 }
 
 dependencyManagement {

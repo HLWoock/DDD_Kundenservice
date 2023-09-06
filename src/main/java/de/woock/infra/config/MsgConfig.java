@@ -11,6 +11,9 @@ import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.config.JmsListenerContainerFactory;
 import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
+import org.springframework.jms.support.converter.MessageConverter;
+import org.springframework.jms.support.converter.MessageType;
 
 @EnableJms
 @Configuration
@@ -22,7 +25,7 @@ public class MsgConfig {
 	    DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
 	    factory.setConnectionFactory(connectionFactory);
 //	    factory.setConcurrency("5-10");
-//	    factory.setPubSubDomain(true);
+	    factory.setPubSubDomain(false);
 	    factory.setClientId("Kundenservice");
 //	    factory.setSubscriptionDurable(false);
 	    configurer.configure(factory, connectionFactory);
@@ -40,8 +43,7 @@ public class MsgConfig {
 	public JmsTemplate jmsTemplate() {
 	    JmsTemplate template = new JmsTemplate();
 	    template.setConnectionFactory(connectionFactory());
-//	    template.setPubSubDomain(true);
+	    template.setPubSubDomain(false);
 	    return template;
 	}
-
 }
