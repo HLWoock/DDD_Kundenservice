@@ -52,7 +52,7 @@ dependencyManagement {
 }
 
 bootBuildImage{
-	imageName = "oosemicro/sb-kundenservice:0.1.0"
+	imageName = "hermannw/kundenservice:0.1.0"
 }
 
 tasks.named('test') {
